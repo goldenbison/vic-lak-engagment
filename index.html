@@ -33,6 +33,15 @@
             min-height: 100vh;
             width: 100%;
         }
+
+        @media (max-width: 768px) {
+            html {
+                background-image: url('https://i.pinimg.com/564x/1f/61/31/1f61313f751c5026a19c9efaba3e6ba3.jpg');
+                background-size: 130% auto; /* Zoom in slightly to focus on part of the image */
+                background-position: center top; /* Position at top center */
+                background-attachment: scroll; /* Better performance on mobile */
+            }
+        }
         
         .content-wrapper {
             min-height: 100vh;
@@ -177,7 +186,7 @@
         <section id="home" class="min-h-screen flex items-center pt-16 md:pt-24">
             <div class="w-full h-full flex items-center">
                 <div class="container mx-auto px-4 text-center">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase-heading">VICTOR & LAKNA</h1>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase-heading" style="padding-top: 50px">VICTOR & LAKNA</h1>
                     
                     <p class="text-xl md:text-2xl mb-6 en-content uppercase-heading">ARE GETTING ENGAGED!</p>
                     <p class="text-xl md:text-2xl mb-6 km-content khmer-font uppercase-heading">កំពុងរៀបចំពិធីភ្ជាប់ពាក្យ</p>
@@ -222,7 +231,7 @@
         </section>
 
         <!-- Event Details Section -->
-        <section id="event" class="py-12 md:py-16 relative">
+        <section id="event" class="py-12 md:py-16 relative bg-opacity-85 bg-slate-50">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 en-content">Event Details</h2>
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 km-content khmer-font">ព័ត៌មានលម្អិត</h2>
@@ -278,6 +287,8 @@
                 </div>
             </div>
         </section>
+
+        <hr/>
 
         <!-- RSVP Section -->
         <!-- RSVP Section with Beautified Form and Phone Masking (Bilingual) -->
