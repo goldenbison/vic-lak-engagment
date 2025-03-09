@@ -18,7 +18,7 @@
         /* Apply background directly to html to ensure it shows */
         html {
             background-image: url('https://static.vecteezy.com/system/resources/previews/026/126/035/non_2x/blue-rose-flower-frame-with-watercolor-for-wedding-birthday-card-background-invitation-wallpaper-sticker-decoration-etc-vector.jpg');
-            background-size: cover;
+            background-size: 105% auto; /* Zoom in slightly to focus on part of the image */
             background-attachment: fixed;
             background-position: center;
             min-height: 100%;
@@ -197,15 +197,18 @@
             <div class="w-full h-full flex items-center">
                 <div class="container mx-auto px-4 text-center">
                     <div class="py-2 md:py-16 relative bg-opacity-85 bg-slate-50">
-                        <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase-heading" style="padding-top: 50px">VICTOR & LAKNA</h1>
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase-heading en-content" style="padding-top: 50px">VICTOR & LAKNA</h1>
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase-heading km-content" style="padding-top: 50px">ខូវ ទី វិកទ័រ និង និត លុចលក្ខណា</h1>
                         
                         <p class="text-xl md:text-2xl mb-6 en-content uppercase-heading">ARE GETTING ENGAGED!</p>
-                        <p class="text-xl md:text-2xl mb-6 km-content khmer-font uppercase-heading">កំពុងរៀបចំពិធីភ្ជាប់ពាក្យ</p>
+                        <p class="text-xl md:text-2xl mb-6 km-content uppercase-heading" style="font-size: 20px;">សិរីមង្គលពិធីភ្ជាប់ពាក្យ</p>
                         
                         <p class="text-lg md:text-xl mb-6 en-content uppercase-heading">PLEASE JOIN US FOR OUR ENGAGEMENT CEREMONY</p>
-                        <p class="text-lg md:text-xl mb-6 km-content khmer-font uppercase-heading">សូមអញ្ជើញចូលរួមពិធីភ្ជាប់ពាក្យរបស់យើង</p>
+                        <p class="text-lg md:text-xl mb-6 km-content uppercase-heading" style="font-size: 20px;">សូមអញ្ជើញចូលរួមពិធីភ្ជាប់ពាក្យរបស់យើង</p>
                         
-                        <p class="text-lg md:text-xl mb-8">June 1, 2025</p>
+                        <p class="text-lg md:text-xl mb-8 en-content">June 1, 2025</p>
+                        <p class="text-lg md:text-xl mb-8 km-content" style="font-size: 20px;">០១​ មិថុនា​ ២០២៥</p>
+
                     </div>
 
                     
@@ -256,10 +259,12 @@
                                 <h3 class="text-xl md:text-2xl font-semibold mb-2 en-content">Date & Time</h3>
                                 <h3 class="text-xl md:text-2xl font-semibold mb-2 km-content khmer-font">កាលបរិច្ឆេទ និងពេលវេលា</h3>
                                 
-                                <p class="flex items-center"><i class="far fa-calendar-alt mr-3 text-primary-color"></i> June 1, 2025</p>
+                                <p class="flex items-center en-content"><i class="far fa-calendar-alt mr-3 text-primary-color"></i> June 1, 2025</p>
+                                <p class="flex items-center km-content" style="font-size: 20px;"><i class="far fa-calendar-alt mr-3 text-primary-color"></i> ០១​ មិថុនា​ ២០២៥</p>
+                                
                                 <p class="flex items-center"><i class="far fa-clock mr-3 text-primary-color"></i> 
                                     <span class="en-content">7:00 AM - 1:00 PM</span>
-                                    <span class="km-content khmer-font">៧:០០ ព្រឹក - ១:០០ រសៀល</span>
+                                    <span class="km-content" style="font-size: 20px;">៧:០០ ព្រឹក - ១:០០ រសៀល</span>
                                 </p>
                             </div>
                             
@@ -267,11 +272,13 @@
                                 <h3 class="text-xl md:text-2xl font-semibold mb-2 en-content">Location</h3>
                                 <h3 class="text-xl md:text-2xl font-semibold mb-2 km-content khmer-font">ទីកន្លែង</h3>
                                 
-                                <p class="flex items-center"><i class="fas fa-map-marker-alt mr-3 text-primary-color"></i> House #116 Street 654</p>
+                                <p class="flex items-center en-content"><i class="fas fa-map-marker-alt mr-3 text-primary-color"></i> House #116 Street 654</p>
                                 <p class="ml-6 en-content">Sangkat Nirouth, Chbar Ampov</p>
                                 <p class="ml-6 en-content">Phnom Penh, Cambodia 121203</p>
-                                <p class="ml-6 km-content khmer-font">សង្កាត់និរោធ ច្បារអំពៅ</p>
-                                <p class="ml-6 km-content khmer-font">រាជធានីភ្នំពេញ កម្ពុជា ១២១២០៣</p>
+                                
+                                <p class="flex items-center km-content" style="font-size: 20px;"><i class="fas fa-map-marker-alt mr-3 text-primary-color"></i> ផ្ទះលេខ ១១៦ ផ្លូវ ៦៥៤</p>
+                                <p class="ml-6 km-content" style="font-size: 20px;">សង្កាត់និរោធ ច្បារអំពៅ</p>
+                                <p class="ml-6 km-content" style="font-size: 20px;">រាជធានីភ្នំពេញ កម្ពុជា ១២១២០៣</p>
                                 
                                 <!-- Google Maps Link -->
                                 <a href="https://maps.app.goo.gl/oe1zKzJZ2LsRMyVU9" target="_blank" class="map-link ml-6 mt-2">
