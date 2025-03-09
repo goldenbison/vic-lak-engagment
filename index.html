@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V&L Engagement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&family=Moul&family=Koulen&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #a5c7e4;
+            --secondary-color: #f8f9fa;
+            --accent-color: #c5d8e8;
+            --text-color: #333333;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: #f8f6f1;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .content-wrapper {
+            background-color: #f8f6f1;
+            min-height: 100vh;
+            width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .khmer-font {
+            font-family: 'Koulen', 'Moul', cursive;
+        }
+        
+        .uppercase-heading {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .countdown-item {
+            background-color: var(--primary-color);
+            color: black;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/029/265/431/original/wedding-backdrop-blue-flower-wedding-decoration-beautiful-flowers-free-4k-free-video.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        /* New countdown style button class */
+        .countdown-style-button {
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/029/265/431/original/wedding-backdrop-blue-flower-wedding-decoration-beautiful-flowers-free-4k-free-video.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            color: black;
+            position: relative;
+            overflow: hidden;
+            font-weight: bold;
+            padding: 1rem 2rem;
+            text-align: center;
+            min-width: 160px;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-style-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .countdown-style-button span {
+            position: relative;
+            z-index: 10;
+        }
+        .button-primary {
+            background-color: var(--primary-color);
+            color: white;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .button-primary:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .language-selector button {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+        
+        .language-selector button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 8px rgba(165, 199, 228, 0.7);
+        }
+        
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            color: #4682B4;
+            text-decoration: none;
+            margin-top: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        .map-link:hover {
+            color: #2a5b86;
+            text-decoration: underline;
+        }
+        
+        /* Language rules - simplifying to make sure they work */
+        .en-content, .km-content {
+            display: none !important;
+        }
+        
+        /* Show the right language content */
+        html[lang="en"] .en-content {
+            display: block !important;
+        }
+        
+        html[lang="km"] .km-content {
+            display: block !important;
+        }
+        
+        /* Inline elements need special handling */
+        html[lang="en"] span.en-content,
+        html[lang="en"] a.en-content,
+        html[lang="en"] button.en-content {
+            display: inline-block !important;
+        }
+        
+        html[lang="km"] span.km-content,
+        html[lang="km"] a.km-content,
+        html[lang="km"] button.km-content {
+            display: inline-block !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector in Nav -->
+    <nav class="bg-white shadow-sm fixed w-full z-10">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-gray-800">V & L</a>
+                
+                <!-- Single Language Toggle with Flag Image -->
+                <div class="language-selector">
+                    <button id="language-toggle" class="rounded-full overflow-hidden w-10 h-10 flex items-center justify-center border-2 border-primary-color p-0" onclick="toggleLanguage()">
+                        <img id="en-flag" src="https://img.freepik.com/free-vector/illustration-uk-flag_53876-18166.jpg" alt="English" class="w-full h-full object-cover">
+                        <img id="km-flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_Cambodia.svg/1200px-Flag_of_Cambodia.svg.png" alt="Khmer" class="w-full h-full object-cover hidden">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center pt-16 md:pt-24">
+            <div class="w-full h-full flex items-center">
+                <div class="container mx-auto px-4 text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase-heading">VICTOR & LAKNA</h1>
+                    
+                    <p class="text-xl md:text-2xl mb-6 en-content uppercase-heading">ARE GETTING ENGAGED!</p>
+                    <p class="text-xl md:text-2xl mb-6 km-content khmer-font uppercase-heading">កំពុងរៀបចំពិធីភ្ជាប់ពាក្យ</p>
+                    
+                    <p class="text-lg md:text-xl mb-6 en-content uppercase-heading">PLEASE JOIN US FOR OUR ENGAGEMENT CEREMONY</p>
+                    <p class="text-lg md:text-xl mb-6 km-content khmer-font uppercase-heading">សូមអញ្ជើញចូលរួមពិធីភ្ជាប់ពាក្យរបស់យើង</p>
+                    
+                    <p class="text-lg md:text-xl mb-8">June 1, 2025</p>
+                    
+                    <!-- Countdown Timer -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xs md:max-w-2xl mx-auto mb-8">
+                        <div class="countdown-item p-4 flex flex-col items-center">
+                            <span id="days" class="text-2xl md:text-4xl font-bold relative z-10">00</span>
+                            <span class="text-sm en-content relative z-10">Days</span>
+                            <span class="text-sm km-content khmer-font relative z-10">ថ្ងៃ</span>
+                        </div>
+                        <div class="countdown-item p-4 flex flex-col items-center">
+                            <span id="hours" class="text-2xl md:text-4xl font-bold relative z-10">00</span>
+                            <span class="text-sm en-content relative z-10">Hours</span>
+                            <span class="text-sm km-content khmer-font relative z-10">ម៉ោង</span>
+                        </div>
+                        <div class="countdown-item p-4 flex flex-col items-center">
+                            <span id="minutes" class="text-2xl md:text-4xl font-bold relative z-10">00</span>
+                            <span class="text-sm en-content relative z-10">Minutes</span>
+                            <span class="text-sm km-content khmer-font relative z-10">នាទី</span>
+                        </div>
+                        <div class="countdown-item p-4 flex flex-col items-center">
+                            <span id="seconds" class="text-2xl md:text-4xl font-bold relative z-10">00</span>
+                            <span class="text-sm en-content relative z-10">Seconds</span>
+                            <span class="text-sm km-content khmer-font relative z-10">វិនាទី</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#rsvp" class="countdown-style-button en-content">
+                        <span>RSVP Now</span>
+                    </a>
+                    <a href="#rsvp" class="countdown-style-button km-content khmer-font">
+                        <span>ឆ្លើយតបឥឡូវនេះ</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details Section -->
+        <section id="event" class="py-12 md:py-16 relative">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 en-content">Event Details</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 km-content khmer-font">ព័ត៌មានលម្អិត</h2>
+                
+                <div class="md:grid md:grid-cols-2 gap-8 items-center">
+                    <div class="mb-8 md:mb-0">
+                        <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                            <div class="mb-6">
+                                <h3 class="text-xl md:text-2xl font-semibold mb-2 en-content">Date & Time</h3>
+                                <h3 class="text-xl md:text-2xl font-semibold mb-2 km-content khmer-font">កាលបរិច្ឆេទ និងពេលវេលា</h3>
+                                
+                                <p class="flex items-center"><i class="far fa-calendar-alt mr-3 text-primary-color"></i> June 1, 2025</p>
+                                <p class="flex items-center"><i class="far fa-clock mr-3 text-primary-color"></i> 
+                                    <span class="en-content">6:00 PM - 10:00 PM</span>
+                                    <span class="km-content khmer-font">ល្ងាច ៦:០០ - យប់ ១០:០០</span>
+                                </p>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h3 class="text-xl md:text-2xl font-semibold mb-2 en-content">Location</h3>
+                                <h3 class="text-xl md:text-2xl font-semibold mb-2 km-content khmer-font">ទីកន្លែង</h3>
+                                
+                                <p class="flex items-center"><i class="fas fa-map-marker-alt mr-3 text-primary-color"></i> House #116 Street 654</p>
+                                <p class="ml-6 en-content">Sangkat Nirouth, Chbar Ampov</p>
+                                <p class="ml-6 en-content">Phnom Penh, Cambodia 121203</p>
+                                <p class="ml-6 km-content khmer-font">សង្កាត់និរោធ ច្បារអំពៅ</p>
+                                <p class="ml-6 km-content khmer-font">រាជធានីភ្នំពេញ កម្ពុជា ១២១២០៣</p>
+                                
+                                <!-- Google Maps Link -->
+                                <a href="https://maps.app.goo.gl/oe1zKzJZ2LsRMyVU9" target="_blank" class="map-link ml-6 mt-2">
+                                    <i class="fas fa-directions mr-2"></i>
+                                    <span class="en-content">Get directions on Google Maps</span>
+                                    <span class="km-content khmer-font">បង្ហាញផ្លូវនៅលើ Google Maps</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <!-- Google Map Embed -->
+                        <div class="rounded-lg overflow-hidden shadow-sm h-60 md:h-96">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d934.0676415410989!2d104.9410188!3d11.527427!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2skh!4v1741508334612!5m2!1sen!2skh"
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <!-- RSVP Section with Beautified Form and Phone Masking (Bilingual) -->
+<section id="rsvp" class="py-12 md:py-16 relative bg-slate-50">
+    <div class="container mx-auto px-4">
+        <!-- English Title -->
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-8 md:mb-10 font-serif text-gray-800 en-content">RSVP</h2>
+        <!-- Khmer Title -->
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-8 md:mb-10 font-serif text-gray-800 km-content khmer-font">ចុះឈ្មោះចូលរួម</h2>
+        
+        <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <!-- English Intro Text -->
+            <p class="text-center mb-8 text-gray-700 font-light text-lg en-content">
+                Please let us know if you can make it to our special day by <span class="font-medium">May 1, 2025</span>
+            </p>
+            
+            <!-- Khmer Intro Text -->
+            <p class="text-center mb-8 text-gray-700 font-light text-lg km-content khmer-font">
+                សូមជូនដំណឹងប្រសិនអ្នកអាចចូលរួមពិធីរបស់យើងត្រឹម <span class="font-medium">ថ្ងៃទី ១ ខែឧសភា ឆ្នាំ២០២៥</span>
+            </p>
+            
+            <!-- English Form -->
+            <form name="rsvp" method="POST" class="space-y-6 en-content" data-netlify="true">
+                <!-- Full Name -->
+                <div>
+                    <label for="name-en" class="block mb-2 text-gray-700 font-medium">
+                        Full Name <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name-en" 
+                        name="name" 
+                        required 
+                        class="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300"
+                        placeholder="Your full name"
+                    >
+                </div>
+                
+                <!-- Phone Number with Mask -->
+                <div>
+                    <label for="phone-en" class="block mb-2 text-gray-700 font-medium">
+                        Phone Number <span class="text-red-500">*</span>
+                    </label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-4 text-gray-700 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md">
+                            +855
+                        </span>
+                        <input 
+                            type="tel" 
+                            id="phone-en" 
+                            name="phone" 
+                            class="phone-input w-full px-4 py-3 border border-gray-300 rounded-r-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300" 
+                            placeholder="XX XXX-XXXX"
+                            required
+                            autocomplete="tel"
+                        >
+                    </div>
+                </div>
+                
+                <!-- Will you attend? -->
+                <div>
+                    <label for="attendance-en" class="block mb-2 text-gray-700 font-medium">
+                        Will you attend? <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <select 
+                            id="attendance-en" 
+                            name="attendance" 
+                            required 
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300 appearance-none bg-white"
+                        >
+                            <option value="" selected disabled>Please select</option>
+                            <option value="yes">Yes, I will attend</option>
+                            <option value="no">Sorry, I cannot attend</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Number of Guests -->
+                <div>
+                    <label for="guests-en" class="block mb-2 text-gray-700 font-medium">
+                        Number of Guests
+                    </label>
+                    <div class="relative">
+                        <select 
+                            id="guests-en" 
+                            name="guests" 
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300 appearance-none bg-white"
+                        >
+                            <option value="1">Just me</option>
+                            <option value="2">2 people</option>
+                            <option value="3">3 people</option>
+                            <option value="4">4 people</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Special message or dietary requirements -->
+                <div>
+                    <label for="message-en" class="block mb-2 text-gray-700 font-medium">
+                        Special Message (Optional)
+                    </label>
+                    <textarea 
+                        id="message-en" 
+                        name="message" 
+                        rows="3" 
+                        class="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300"
+                        placeholder="Any special message or request for the couple..."
+                    ></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="text-center pt-4">
+                    <button type="submit" class="countdown-style-button">
+                        <span>Submit RSVP</span>
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Khmer Form -->
+            <form name="rsvp-km" method="POST" class="space-y-6 km-content" data-netlify="true">
+                <!-- Full Name -->
+                <div>
+                    <label for="name-km" class="block mb-2 text-gray-700 font-medium khmer-font">
+                        ឈ្មោះពេញ <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name-km" 
+                        name="name" 
+                        required 
+                        class="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300"
+                        placeholder="បញ្ចូលឈ្មោះរបស់អ្នក"
+                    >
+                </div>
+                
+                <!-- Phone Number with Mask -->
+                <div>
+                    <label for="phone-km" class="block mb-2 text-gray-700 font-medium khmer-font">
+                        លេខទូរស័ព្ទ <span class="text-red-500">*</span>
+                    </label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-4 text-gray-700 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md">
+                            +855
+                        </span>
+                        <input 
+                            type="tel" 
+                            id="phone-km" 
+                            name="phone" 
+                            class="phone-input w-full px-4 py-3 border border-gray-300 rounded-r-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300" 
+                            placeholder="XX XXX-XXXX"
+                            required
+                            autocomplete="tel"
+                        >
+                    </div>
+                </div>
+                
+                <!-- Will you attend? -->
+                <div>
+                    <label for="attendance-km" class="block mb-2 text-gray-700 font-medium khmer-font">
+                        តើអ្នកនឹងចូលរួមឬទេ? <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <select 
+                            id="attendance-km" 
+                            name="attendance" 
+                            required 
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300 appearance-none bg-white"
+                        >
+                            <option value="" selected disabled>សូមជ្រើសរើស</option>
+                            <option value="yes">បាទ/ចាស ខ្ញុំនឹងចូលរួម</option>
+                            <option value="no">សូមអភ័យទោស ខ្ញុំមិនអាចចូលរួមបានទេ</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Number of Guests -->
+                <div>
+                    <label for="guests-km" class="block mb-2 text-gray-700 font-medium khmer-font">
+                        ចំនួនភ្ញៀវ
+                    </label>
+                    <div class="relative">
+                        <select 
+                            id="guests-km" 
+                            name="guests" 
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300 appearance-none bg-white"
+                        >
+                            <option value="1">ម្នាក់ឯង</option>
+                            <option value="2">២ នាក់</option>
+                            <option value="3">៣ នាក់</option>
+                            <option value="4">៤ នាក់</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Special message or dietary requirements -->
+                <div>
+                    <label for="message-km" class="block mb-2 text-gray-700 font-medium khmer-font">
+                        សារពិសេស (ជម្រើស)
+                    </label>
+                    <textarea 
+                        id="message-km" 
+                        name="message" 
+                        rows="3" 
+                        class="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300"
+                        placeholder="តម្រូវការ ឬពិសេសសារផ្ញើទៅគូដណ្តឹង..."
+                    ></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="text-center pt-4">
+                    <button type="submit" class="countdown-style-button khmer-font">
+                        <span>ផ្ញើការឆ្លើយតប</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+        <!-- Footer -->
+        <footer class="py-6 bg-gray-800 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <p class="en-content">We hope to see you there!</p>
+                <p class="km-content khmer-font">យើងសង្ឃឹមថានឹងជួបអ្នកនៅទីនោះ!</p>
+            </div>
+        </footer>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all phone input elements 
+    const phoneInputs = document.querySelectorAll('.phone-input');
+    
+    // Apply masking to each phone input
+    phoneInputs.forEach(phoneInput => {
+        // Add input event listener for masking
+        phoneInput.addEventListener('input', function(e) {
+            // Get the input value and remove non-digits
+            let input = e.target.value.replace(/\D/g, '');
+            
+            // Limit to 9 digits (typical for Cambodia)
+            input = input.substring(0, 9);
+            
+            // Format: XX XXX-XXXX (Cambodian format)
+            if (input.length > 0) {
+                if (input.length <= 2) {
+                    phoneInput.value = input;
+                } else if (input.length <= 5) {
+                    phoneInput.value = `${input.substring(0, 2)} ${input.substring(2)}`;
+                } else {
+                    phoneInput.value = `${input.substring(0, 2)} ${input.substring(2, 5)}-${input.substring(5)}`;
+                }
+            }
+        });
+        
+        // Handle paste events
+        phoneInput.addEventListener('paste', function(e) {
+            setTimeout(function() {
+                // Trigger the input event to format after paste
+                const inputEvent = new Event('input');
+                phoneInput.dispatchEvent(inputEvent);
+            }, 0);
+        });
+    });
+});
+</script>
+
+<script>
+
+// Toggle between languages
+function toggleLanguage() {
+    const currentLang = document.documentElement.getAttribute('lang') || 'en';
+    const newLang = currentLang === 'en' ? 'km' : 'en';
+    
+    // Switch language
+    document.documentElement.setAttribute('lang', newLang);
+    localStorage.setItem('preferredLanguage', newLang);
+    
+    // Update visible flag
+    document.getElementById('en-flag').classList.toggle('hidden');
+    document.getElementById('km-flag').classList.toggle('hidden');
+}
+
+// Check for saved language preference
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLanguage = localStorage.getItem('preferredLanguage') || 'en';
+    
+    // Set initial language
+    document.documentElement.setAttribute('lang', savedLanguage);
+    
+    // Show the correct flag
+    if (savedLanguage === 'km') {
+        document.getElementById('en-flag').classList.add('hidden');
+        document.getElementById('km-flag').classList.remove('hidden');
+    } else {
+        document.getElementById('en-flag').classList.remove('hidden');
+        document.getElementById('km-flag').classList.add('hidden');
+    }
+    
+    // Countdown Timer for June 1, 2025
+    function updateCountdown() {
+        const engagementDate = new Date("June 1, 2025 08:00:00").getTime();
+        const now = new Date().getTime();
+        const timeLeft = engagementDate - now;
+        
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        
+        document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+        document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+    }
+    
+    // Initial call and set interval
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+});
+</script>
+</body>
+</html>
