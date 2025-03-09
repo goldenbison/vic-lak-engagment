@@ -43,9 +43,27 @@
             }
 
             #home, .min-h-screen {
-    min-height: 95vh;
-}
+                min-height: 95vh;
+            }
 
+        }
+
+        .mobile-content {
+            display: none;
+        }
+
+        .desktop-content {
+            display: block;
+        }
+
+        /* When screen width is less than 768px (mobile) */
+        @media screen and (max-width: 768px) {
+            .mobile-content {
+                display: block;
+            }
+            .desktop-content {
+                display: none;
+            }
         }
 
         #home, .min-h-screen {
@@ -198,8 +216,13 @@
                 <div class="container mx-auto px-4 text-center">
                     <div class="py-2 md:py-16 relative bg-opacity-85 bg-slate-50">
                         <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase-heading en-content" style="padding-top: 50px">VICTOR & LAKNA</h1>
-                        <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase-heading km-content" style="padding-top: 50px">ខូវ ទី វិកទ័រ និង និត លុចលក្ខណា</h1>
-                        
+                        <div class="desktop-content">
+                            <h1 class="text-4xl md:text-6xl font-medium mb-4 uppercase-heading km-content" style="padding-top: 50px">ខូវ ទី វិកទ័រ និង និត លុចលក្ខណា</h1>
+                        </div>
+                        <div class="mobile-content">
+                            <h1 class="text-4xl md:text-6xl font-medium mb-4 uppercase-heading km-content" style="padding-top: 50px">ខូវ ទី វិកទ័រ <br/>និង<br/> និត លុចលក្ខណា</h1>
+                        </div>
+
                         <p class="text-xl md:text-2xl mb-6 en-content uppercase-heading">ARE GETTING ENGAGED!</p>
                         <p class="text-xl md:text-2xl mb-6 km-content uppercase-heading" style="font-size: 20px;">សិរីមង្គលពិធីភ្ជាប់ពាក្យ</p>
                         
