@@ -310,12 +310,12 @@
                                     <span class="km-content khmer-font">បង្ហាញផ្លូវនៅលើ Google Maps</span>
                                 </a> -->
                                 <a href="https://maps.app.goo.gl/oe1zKzJZ2LsRMyVU9" 
-   onclick="openMaps(event, '13.2856,103.8593')" 
-   class="map-link ml-6 mt-2">
-    <i class="fas fa-directions mr-2"></i>
-    <span class="en-content">Get directions on Google Maps</span>
-    <span class="km-content khmer-font">បង្ហាញផ្លូវនៅលើ Google Maps</span>
-</a>
+                                    onclick="openMaps(event, '11.527544,104.941264')" 
+                                    class="map-link ml-6 mt-2">
+                                        <i class="fas fa-directions mr-2"></i>
+                                        <span class="en-content">Get directions on Google Maps</span>
+                                        <span class="km-content khmer-font">បង្ហាញផ្លូវនៅលើ Google Maps</span>
+                                </a>
 
                             </div>
                         </div>
@@ -589,27 +589,27 @@
         </footer>
     </div>
 
-    <script>
-        function openMaps(event, coordinates) {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            
-            // Check if device is iOS
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                window.location.href = "comgooglemaps://?q=" + coordinates;
-            } 
-            // Check if device is Android
-            else if (/android/i.test(userAgent)) {
-                window.location.href = "geo:" + coordinates;
-            } 
-            // Default to web URL
-            else {
-                return true; // Let the default link action happen
-            }
-            
-            event.preventDefault();
-            return false;
+<script>
+    function openMaps(event, coordinates) {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        
+        // Check if device is iOS
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            window.location.href = "comgooglemaps://?q=" + coordinates;
+        } 
+        // Check if device is Android
+        else if (/android/i.test(userAgent)) {
+            window.location.href = "geo:" + coordinates;
+        } 
+        // Default to web URL
+        else {
+            return true; // Let the default link action happen
         }
-        </script>
+        
+        event.preventDefault();
+        return false;
+    }
+    </script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
