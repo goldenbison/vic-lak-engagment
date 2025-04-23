@@ -131,7 +131,7 @@
           overflow: visible; /* Changed from hidden to visible */
           margin-bottom: 0;
           position: relative;
-          padding-top: 20px; /* Removed padding-top */
+          padding-top: 10vh; /* Removed padding-top */
       }
 
       /* Zoom effect on the container */
@@ -1099,7 +1099,7 @@
           <div class='heart'></div>
         </div>
         <!-- Scroll Down Indicator -->
-        <div class="scroll-indicator" id="scroll-indicator"></div>
+        <!-- <div class="scroll-indicator" id="scroll-indicator"></div> -->
       </div>
       <!-- RSVP Section - Scrollable Content Below Envelope -->
       <div class="rsvp-container">
@@ -1217,7 +1217,7 @@
           setTimeout(() => {
             rsvpSection.classList.add('show');
             scrollIndicator.classList.add('show');
-          }, 3000);
+          }, 1500);
         }, 500);
         // Add scroll functionality for "Scroll to RSVP" indicator
         scrollIndicator.addEventListener('click', () => {
