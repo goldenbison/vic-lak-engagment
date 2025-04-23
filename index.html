@@ -270,7 +270,7 @@
         }
       }
 
-      /@media screen and (max-width: 768px) {
+      @media screen and (max-width: 768px) {
     .page-wrapper {
         padding-top: clamp(0.5rem, 3vh, 2rem);
     }
@@ -1319,16 +1319,26 @@
           // We won't actually submit here, it's handled by the popup submit button
         });
         // Function to open maps with coordinates
-        window.openMaps = function(event, coords) {
-          event.preventDefault();
-          // Check if it's an iOS device
-          const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-          if (isIOS) {
-            window.location.href = `maps://?q=${coords}`;
-          } else {
-            window.location.href = `https://maps.google.com/?q=${coords}`;
-          }
-        };
+        
+        function openMaps(event, coordinates) {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        
+        // Check if device is iOS
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            window.location.href = "comgooglemaps://?q=" + coordinates;
+        } 
+        // Check if device is Android
+        else if (/android/i.test(userAgent)) {
+            window.location.href = "geo:" + coordinates;
+        } 
+        // Default to web URL
+        else {
+            return true; // Let the default link action happen
+        }
+        
+        event.preventDefault();
+        return false;
+    }
       });
     </script>
   </body>
