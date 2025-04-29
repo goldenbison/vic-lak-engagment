@@ -72,6 +72,8 @@
       .page-wrapper {
         display: flex;
         flex-direction: column;
+        max-width: 960px; /* Set your desired tablet-like width here */
+        margin: 0 auto; /* Center the container */
         width: 100%;
         min-height: 100vh;
         overflow-y: visible; /* Allow content to scroll */
@@ -1168,6 +1170,108 @@ body.telegram-webview .rsvp-container {
     min-height: 100vh;
   }
 }
+
+@media screen and (min-width: 960px) {
+  /* For the fixed background elements - make them respect the container size */
+  .bg-texture, 
+  .canvas-overlay, 
+  .fiber-texture {
+    max-width: 960px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Adjust base font size for proper scaling */
+  :root {
+    font-size: calc(12px + 0.3vw) !important; /* Reduced from original 14px + 0.5vw */
+  }
+  
+  /* Fine-tune envelope letter content */
+  .title {
+    font-size: 0.65rem;
+  }
+  
+  .invitation-text {
+    font-size: 0.6rem;
+  }
+  
+  .welcome-text {
+    font-size: 0.45rem;
+  }
+  
+  .welcome-line {
+    font-size: 0.4rem;
+  }
+  
+  .date {
+    font-size: 0.5rem;
+  }
+  
+  .guest-name-text {
+    font-size: 0.35rem;
+  }
+  
+  /* RSVP section adjustments */
+  .rsvp-title {
+    font-size: 1.6rem;
+  }
+  
+  .rsvp-button {
+    font-size: 1.3rem;
+    padding: 0.7rem 1rem;
+  }
+  
+  .detail-heading {
+    font-size: 1.1rem;
+  }
+  
+  .detail-content {
+    font-size: 1.2rem;
+  }
+  
+  /* Visual enhancements for desktop */
+  body {
+    background-color: #f0f0f0; /* Background outside container */
+    padding: 15px 0; /* Space above and below */
+  }
+  
+  
+  
+  /* Adjust envelope and container scaling */
+  .container > .envelope-wrapper {
+    transform: scale(0.9); /* Slightly smaller envelope */
+  }
+  
+  .container.zoom > .envelope-wrapper {
+    transform: translateY(-5vh) scale(0.9); /* Adjust zoomed envelope */
+  }
+  
+  /* Flower size adjustments */
+  .flower {
+    transform-origin: center center;
+    transform: scale(0.85) rotate(-15deg);
+  }
+}
+.edit-button {
+  margin-top: 15px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--button-border);
+  padding: 8px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.edit-button:hover {
+  background-color: var(--button-hover);
+}
+
+.edit-button:active {
+  background-color: var(--button-active);
+}
     </style>
   </head>
   <body>
@@ -1556,6 +1660,145 @@ body.telegram-webview .rsvp-container {
           document.body.classList.add('telegram-webview');
         }
       });
+      function resetRsvpForm() {
+  // Reset form fields and appearance
+  attendanceField.value = '';
+  commentsField.value = '';
+  
+  // Reset buttons appearance
+  attendButton.classList.remove('selected');
+  notAttendButton.classList.remove('selected');
+  
+  // Re-enable buttons
+  attendButton.disabled = false;
+  notAttendButton.disabled = false;
+  
+  // Hide thank you message
+  thankYouMessage.classList.remove('show');
+  
+  // Clear textarea
+  popupComments.value = '';
+}
+
+// Function to add an "Edit Response" button
+function addNewSubmissionButton() {
+  // Check if button already exists
+  if (document.getElementById('new-submission-button')) {
+    return;
+  }
+  
+  // Create a new button element
+  const newSubmissionButton = document.createElement('button');
+  newSubmissionButton.type = 'button';
+  newSubmissionButton.className = 'rsvp-button';
+  newSubmissionButton.id = 'new-submission-button';
+  newSubmissionButton.style.marginTop = '15px';
+  newSubmissionButton.style.backgroundColor = '#e8f0f8';
+  newSubmissionButton.style.color = '#333';
+  newSubmissionButton.style.fontSize = '1rem';
+  newSubmissionButton.textContent = 'កែប្រែចម្លើយ';  // Edit Response in Khmer
+  
+  // Add click event listener
+  newSubmissionButton.addEventListener('click', function() {
+    resetRsvpForm();
+    
+    // Remove this button after click
+    if (newSubmissionButton.parentNode) {
+      newSubmissionButton.parentNode.removeChild(newSubmissionButton);
+    }
+  });
+  
+  // Insert the button after the thank you message
+  thankYouMessage.parentNode.insertBefore(newSubmissionButton, thankYouMessage.nextSibling);
+}
+
+// REPLACE these two functions in your existing script:
+
+// REPLACE your existing submitForm function with this one:
+function submitForm() {
+  // Make sure an attendance option is selected
+  if (!attendanceField.value) {
+    alert('Please select if you will attend or not.');
+    return;
+  }
+  
+  // Generate a new timestamp for the current submission
+  const submissionTimestamp = Date.now();
+  document.getElementById('timestamp-field').value = new Date(submissionTimestamp).toISOString();
+  
+  // Prepare form data
+  const formData = new FormData(rsvpForm);
+  
+  // Create a response object
+  const responseData = {
+    guestId: guestId,
+    guestName: document.getElementById('guest-name-field').value,
+    attendance: attendanceField.value,
+    comments: commentsField.value,
+    timestamp: document.getElementById('timestamp-field').value
+  };
+  
+  // Store this submission in localStorage with a unique timestamp key
+  const submissionKey = `wedding_response_${guestId}_${submissionTimestamp}`;
+  localStorage.setItem(submissionKey, JSON.stringify(responseData));
+  
+  // Submit form to Netlify
+  fetch('/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: new URLSearchParams(formData).toString()
+  }).then(() => {
+    // Temporarily disable buttons and show thank you message
+    attendButton.disabled = true;
+    notAttendButton.disabled = true;
+    thankYouMessage.classList.add('show');
+    
+    // Add the edit/new submission button
+    addNewSubmissionButton();
+    
+  }).catch((error) => {
+    alert('Oops! There was a problem submitting your response: ' + error.message);
+  });
+}
+
+// REPLACE your existing checkPreviousResponse function with this one:
+function checkPreviousResponse(guestId) {
+  // Get all keys from localStorage that start with the guestId
+  const keys = Object.keys(localStorage).filter(key => 
+    key.startsWith(`wedding_response_${guestId}_`));
+  
+  if (keys.length > 0) {
+    // Sort keys by timestamp (newest first)
+    keys.sort().reverse();
+    
+    // Get the most recent response
+    const mostRecentKey = keys[0];
+    const responseData = JSON.parse(localStorage.getItem(mostRecentKey));
+    
+    // Show the most recent response as selected
+    if (responseData.attendance === 'attending') {
+      attendButton.classList.add('selected');
+      attendButton.disabled = true;
+      notAttendButton.disabled = true;
+    } else if (responseData.attendance === 'not_attending') {
+      notAttendButton.classList.add('selected');
+      attendButton.disabled = true;
+      notAttendButton.disabled = true;
+    }
+    
+    // Show the thank you message
+    thankYouMessage.classList.add('show');
+    
+    // Add button to make a new submission
+    addNewSubmissionButton();
+    
+    return true;
+  }
+  
+  return false;
+}
     </script>
     
   </body>
