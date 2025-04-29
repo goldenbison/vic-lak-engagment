@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>V & L Engagement Invitation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,11 +42,13 @@
         padding: 0;
       }
 
-      html,
-      body {
+      html, body {
         overflow-x: hidden;
+        overflow-y: auto; /* Allow vertical scrolling */
         position: relative;
         width: 100%;
+        height: auto; /* Don't use fixed height */
+        min-height: 100%;
       }
 
       body {
@@ -68,12 +70,12 @@
       }
 
       .page-wrapper {
-          display: flex;
-          flex-direction: column;
-          overflow-x: hidden;
-          width: 100%;
-          min-height: 100vh;
-          padding-top: clamp(1rem, 5vh, 3rem); /* Adjusted top padding */
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+        overflow-y: visible; /* Allow content to scroll */
+        padding-top: clamp(1rem, 5vh, 3rem);
       }
 
       /* Premium canvas background texture */
@@ -120,7 +122,7 @@
       }
 
       .container {
-          height: clamp(60vh, 70vh, 80vh);
+          height: auto;
           min-height: 400px;
           width: 100%;
           display: flex;
@@ -692,7 +694,8 @@
         padding-top: 20px;
         padding-bottom: 60px;
         position: relative;
-        height: 115vh;
+        height: auto;
+        min-height: 125vh;
       }
 
       /* RSVP Section Styles */
@@ -1143,6 +1146,28 @@
     font-size: 0.45rem;
   }
 }
+
+/* Add these styles */
+body.telegram-webview {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto !important;
+}
+
+body.telegram-webview .container {
+  overflow: visible !important;
+}
+
+body.telegram-webview .rsvp-container {
+  height: auto !important;
+}
+
+/* Force content to be scrollable in Telegram */
+@media screen and (max-width: 100vw) {
+  body.telegram-webview {
+    height: auto !important;
+    min-height: 100vh;
+  }
+}
     </style>
   </head>
   <body>
@@ -1508,231 +1533,30 @@
           return false;
         };
       });
-    </script>
-    <script>
-      // Function to detect if we're in Telegram's in-app browser
-      function isTelegramWebView() {
-        return navigator.userAgent.includes('Telegram') || 
-               navigator.userAgent.includes('TelegramBot') ||
-               window.Telegram ||
-               window.TelegramWebviewProxy;
-      }
-      
-      // Apply fixes for Telegram WebView scrolling issues
-      function applyTelegramFixes() {
-        // Check if we're in Telegram's browser
-        if (isTelegramWebView()) {
-          // Fix 1: Adjust height of main container elements
-          document.documentElement.style.height = 'auto';
+
+      // Add this to your existing script
+      document.addEventListener('DOMContentLoaded', function() {
+        // Detect if running in Telegram WebView
+        const isTelegramWebView = navigator.userAgent.includes('Telegram') || 
+                                window.navigator.userAgent.includes('TelegramBot');
+        
+        if (isTelegramWebView) {
+          // Apply Telegram-specific fixes
           document.body.style.height = 'auto';
-          document.querySelector('.page-wrapper').style.minHeight = 'auto';
+          document.body.style.overflow = 'auto';
+          document.documentElement.style.overflow = 'auto';
           
-          // Fix 2: Ensure container doesn't overflow
-          document.querySelector('.container').style.overflow = 'visible';
+          // Force redraw to help with rendering issues
+          setTimeout(function() {
+            window.scrollTo(0, 1);
+            window.scrollTo(0, 0);
+          }, 500);
           
-          // Fix 3: Adjust RSVP container height to auto instead of fixed
-          const rsvpContainer = document.querySelector('.rsvp-container');
-          if (rsvpContainer) {
-            rsvpContainer.style.height = 'auto';
-            rsvpContainer.style.paddingBottom = '100px';
-          }
-          
-          // Fix 4: Add additional scroll trigger
-          window.addEventListener('load', function() {
-            setTimeout(function() {
-              window.scrollTo(0, 1);
-              window.scrollTo(0, 0);
-            }, 3000); // After animations complete
-          });
-          
-          // Add a special class for Telegram-specific CSS
+          // Add a class to body for Telegram-specific CSS
           document.body.classList.add('telegram-webview');
         }
-      }
-      
-      // Add Telegram-specific CSS
-      function addTelegramStyles() {
-        const telegramStyles = document.createElement('style');
-        telegramStyles.innerHTML = `
-          .telegram-webview {
-            overflow-y: scroll !important;
-            -webkit-overflow-scrolling: touch !important;
-          }
-          
-          .telegram-webview .container {
-            transform: none !important;
-          }
-          
-          .telegram-webview .container.zoom {
-            transform: scale(1.2) !important;
-          }
-          
-          .telegram-webview .container > .envelope-wrapper {
-            transform: scale(0.6) !important;
-          }
-          
-          .telegram-webview .rsvp-section {
-            margin-top: 80px;
-          }
-          
-          @media screen and (max-width: 480px) {
-            .telegram-webview .container {
-              height: auto !important;
-              min-height: 300px !important;
-              margin-bottom: 50px !important;
-            }
-          }
-        `;
-        document.head.appendChild(telegramStyles);
-      }
-      
-      // Run fixes
-      addTelegramStyles();
-      applyTelegramFixes();
-      
-      // Reapply fixes after window resize
-      window.addEventListener('resize', applyTelegramFixes);
+      });
     </script>
-    <script>
-      // Function to detect mobile browser or in-app browser
-      function isMobileOrInAppBrowser() {
-        // Check for mobile devices
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        // Check for in-app browsers (Telegram, Facebook, WhatsApp, etc.)
-        const isInAppBrowser = 
-          navigator.userAgent.includes('Telegram') || 
-          navigator.userAgent.includes('FB_IAB') || 
-          navigator.userAgent.includes('FBAN') || 
-          navigator.userAgent.includes('Instagram') || 
-          navigator.userAgent.includes('WhatsApp') ||
-          (navigator.userAgent.includes('Android') && navigator.userAgent.includes('wv'));
-          
-        return isMobile || isInAppBrowser;
-      }
     
-      // Apply mobile and in-app browser fixes
-      function applyMobileFixes() {
-        if (isMobileOrInAppBrowser()) {
-          // Add mobile-specific class to body
-          document.body.classList.add('mobile-view');
-          
-          // Fix viewport issues
-          const meta = document.querySelector('meta[name="viewport"]');
-          if (meta) {
-            meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-          }
-          
-          // Make content scrollable
-          document.documentElement.style.height = 'auto';
-          document.body.style.height = 'auto';
-          document.body.style.overflowY = 'scroll';
-          
-          // Fix container sizing
-          const container = document.querySelector('.container');
-          const pageWrapper = document.querySelector('.page-wrapper');
-          const rsvpContainer = document.querySelector('.rsvp-container');
-          
-          if (pageWrapper) {
-            pageWrapper.style.minHeight = 'auto';
-            pageWrapper.style.height = 'auto';
-          }
-          
-          if (container) {
-            container.style.height = 'auto';
-            container.style.minHeight = '350px';
-            container.style.overflow = 'visible';
-          }
-          
-          if (rsvpContainer) {
-            rsvpContainer.style.height = 'auto';
-            rsvpContainer.style.paddingBottom = '100px';
-          }
-          
-          // Handle animation timing issues
-          window.addEventListener('load', function() {
-            // Force layout recalculation and enable scrolling after animations
-            setTimeout(function() {
-              window.scrollTo(0, 1);
-              window.scrollTo(0, 0);
-              
-              // Add additional class to indicate animations are complete
-              document.body.classList.add('animations-complete');
-            }, 3500);
-          });
-        }
-      }
-      
-      // Add mobile-specific CSS styles
-      function addMobileStyles() {
-        const mobileStyles = document.createElement('style');
-        mobileStyles.innerHTML = `
-          .mobile-view {
-            overflow-y: scroll !important;
-            -webkit-overflow-scrolling: touch !important;
-            position: relative !important;
-          }
-          
-          .mobile-view .page-wrapper {
-            padding-top: 0 !important;
-          }
-          
-          .mobile-view .container {
-            height: auto !important;
-            min-height: 350px !important;
-            padding-top: 0 !important;
-            margin-bottom: 20px !important;
-          }
-          
-          .mobile-view .rsvp-container {
-            position: relative !important;
-            z-index: 20 !important;
-          }
-          
-          .mobile-view .container.zoom {
-            transform: none !important;
-          }
-          
-          .mobile-view .container.zoom > .envelope-wrapper {
-            transform: scale(0.7) !important;
-          }
-          
-          .mobile-view .rsvp-section {
-            margin-top: 30px !important;
-            opacity: 1 !important;
-            transform: none !important;
-            z-index: 20 !important;
-          }
-          
-          .mobile-view.animations-complete .envelope-wrapper {
-            transition: none !important;
-          }
-          
-          .mobile-view.animations-complete .letter {
-            animation: none !important;
-            bottom: 0 !important;
-            transform: translateX(-50%) rotate(0deg) scale(1.2) !important;
-          }
-          
-          @media screen and (max-width: 480px) {
-            .mobile-view .container {
-              min-height: 300px !important;
-            }
-            
-            .mobile-view .container > .envelope-wrapper {
-              transform: scale(0.5) !important;
-            }
-          }
-        `;
-        document.head.appendChild(mobileStyles);
-      }
-      
-      // Run all optimizations
-      addMobileStyles();
-      applyMobileFixes();
-      
-      // Reapply on resize (for orientation changes)
-      window.addEventListener('resize', applyMobileFixes);
-    </script>
   </body>
 </html>
