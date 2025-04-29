@@ -1063,6 +1063,8 @@
         background-color: var(--button-selected);
         color: white;
         border-color: var(--button-selected);
+        width: 100%;
+        border-radius: 10px;
       }
 
       .popup-button:hover {
@@ -1453,13 +1455,13 @@ body.telegram-webview .rsvp-container {
       <div class="popup">
         <div class="popup-close" id="popup-close">×</div>
         <h3 class="popup-title" id="popup-title">បញ្ជាក់ការចូលរួម</h3>
-        <div class="comments-section show">
+        <div class="comments-section" hidden="true">
           <label for="popup-comments" class="comments-label">មតិយោបល់ ឬ តម្រូវការពិសេស</label>
           <textarea id="popup-comments" class="comments-input" placeholder="ការរឹតត្បិតអាហារ ឬ មតិយោបល់ផ្សេងទៀត..."></textarea>
         </div>
         <div class="popup-buttons">
-          <button type="button" class="popup-button" id="popup-cancel">បោះបង់</button>
-          <button type="button" class="popup-button submit" id="popup-submit">បញ្ជូន</button>
+          <!-- <button type="button" class="popup-button" id="popup-cancel">បោះបង់</button> -->
+          <button type="button" class="popup-button submit" id="popup-submit">បញ្ជូនចម្លើយ</button>
         </div>
       </div>
     </div>
