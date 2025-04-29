@@ -700,6 +700,10 @@
         min-height: 125vh;
       }
 
+      .rsvp-container.with-edit-button {
+        min-height: 130vh;
+      }
+
       /* RSVP Section Styles */
       .rsvp-section {
         width: 100%;
@@ -1252,25 +1256,80 @@ body.telegram-webview .rsvp-container {
     transform: scale(0.85) rotate(-15deg);
   }
 }
-.edit-button {
-  margin-top: 15px;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  border: 1px solid var(--button-border);
-  padding: 8px 16px;
-  font-family: 'Montserrat', sans-serif;
+/* Elegant styling for the edit response button */
+.edit-response-button {
+  margin-top: 20px;
+  background-color: white;
+  color: var(--button-selected);
+  border: 1px solid var(--button-selected);
+  border-radius: 6px;
+  padding: 10px 25px;
+  font-family: 'Hanuman', serif;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(146, 180, 206, 0.2);
 }
 
-.edit-button:hover {
-  background-color: var(--button-hover);
+/* Hover effect */
+.edit-response-button:hover {
+  background-color: var(--bg-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(146, 180, 206, 0.3);
 }
 
-.edit-button:active {
-  background-color: var(--button-active);
+/* Active effect when clicked */
+.edit-response-button:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 4px rgba(146, 180, 206, 0.2);
+}
+
+/* Icon for the edit button */
+.edit-response-button::before {
+  content: "";
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+/* Animation for button entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation to the button */
+.edit-response-button {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Make the button full-width on mobile for better touch target */
+@media screen and (max-width: 480px) {
+  .edit-response-button {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 15px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Response actions container (thank you message + edit button) */
+.response-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
 }
     </style>
   </head>
@@ -1405,262 +1464,34 @@ body.telegram-webview .rsvp-container {
       </div>
     </div>
     <script>
-      // Auto-open the envelope when the page loads with zoom effect
-      window.addEventListener('DOMContentLoaded', () => {
-        const container = document.querySelector('.container');
-        const envelope = document.querySelector('.envelope-wrapper');
-        const letter = document.querySelector('.letter');
-        const rsvpSection = document.querySelector('.rsvp-section');
-        const scrollIndicator = document.getElementById('scroll-indicator');
-        
-        // Popup elements
-        const popupOverlay = document.getElementById('popup-overlay');
-        const popupClose = document.getElementById('popup-close');
-        const popupTitle = document.getElementById('popup-title');
-        const popupComments = document.getElementById('popup-comments');
-        const popupCancel = document.getElementById('popup-cancel');
-        const popupSubmit = document.getElementById('popup-submit');
-        const thankYouMessage = document.getElementById('thank-you-message');
-        
-        // RSVP elements
-        const attendButton = document.getElementById('attend-button');
-        const notAttendButton = document.getElementById('not-attend-button');
-        const attendanceField = document.getElementById('attendance-field');
-        const commentsField = document.getElementById('comments-field');
-        const rsvpForm = document.getElementById('rsvp-form');
-        
-        // Start envelope animation sequence with a slight delay
-        setTimeout(() => {
-          envelope.classList.add('flap'); // Open envelope
-          // Add zoom effect after the envelope starts to open
-          setTimeout(() => {
-            container.classList.add('zoom'); // Zoom in
-          }, 1000);
-          // Set the z-index after 1.2 seconds
-          setTimeout(() => {
-            letter.classList.add('top-z'); // Apply high z-index class
-          }, 1200);
-          // Show RSVP section after the envelope animation
-          setTimeout(() => {
-            rsvpSection.classList.add('show');
-            if (scrollIndicator) {
-              scrollIndicator.classList.add('show');
-            }
-          }, 1500);
-        }, 500);
-        
-        // Function to get URL parameters to identify the guest
-        function getQueryParam(param) {
-          const urlParams = new URLSearchParams(window.location.search);
-          return urlParams.get(param);
-        }
-        
-        // Generate device ID if not already stored
-        function generateDeviceId() {
-          let deviceId = localStorage.getItem('wedding_invitation_device_id');
-          if (!deviceId) {
-            deviceId = 'device_' + Math.random().toString(36).substring(2, 15);
-            localStorage.setItem('wedding_invitation_device_id', deviceId);
-          }
-          return deviceId;
-        }
-        
-        // Handle checking if a response has already been submitted
-        function checkPreviousResponse(guestId) {
-          const responseKey = `wedding_response_${guestId}`;
-          const previousResponse = localStorage.getItem(responseKey);
-          
-          if (previousResponse) {
-            const responseData = JSON.parse(previousResponse);
-            
-            // Disable buttons
-            attendButton.disabled = true;
-            notAttendButton.disabled = true;
-            
-            // Show the thank you message
-            thankYouMessage.classList.add('show');
-            
-            // Set the appearance based on previous selection
-            if (responseData.attendance === 'attending') {
-              attendButton.classList.add('selected');
-            } else if (responseData.attendance === 'not_attending') {
-              notAttendButton.classList.add('selected');
-            }
-            
-            return true;
-          }
-          
-          return false;
-        }
-        
-        // Update guest name in the invitation
-        function updateGuestName() {
-          const guestNameParam = getQueryParam('name');
-          const guestNameElement = document.getElementById('guest-name-placeholder');
-          
-          if (guestNameParam && guestNameElement) {
-            const decodedName = decodeURIComponent(guestNameParam);
-            guestNameElement.textContent = decodedName;
-            
-            // Also update the hidden field for the form
-            document.getElementById('guest-name-field').value = decodedName;
-          }
-        }
-        
-        // Set up guest tracking
-        const guestId = getQueryParam('guest') || 'unknown_guest';
-        const deviceId = generateDeviceId();
-        
-        // Update hidden fields
-        document.getElementById('guest-id-field').value = guestId;
-        document.getElementById('device-id-field').value = deviceId;
-        document.getElementById('timestamp-field').value = new Date().toISOString();
-        
-        // Update guest name in the invitation
-        updateGuestName();
-        
-        // Check if this guest has already responded
-        const hasResponded = checkPreviousResponse(guestId);
-        
-        if (!hasResponded) {
-          // RSVP buttons functionality (only set up if not yet responded)
-          let currentSelection = '';
-          
-          attendButton.addEventListener('click', function() {
-            attendButton.classList.add('selected');
-            notAttendButton.classList.remove('selected');
-            currentSelection = 'attending';
-            attendanceField.value = 'attending';
-            
-            // Show popup with appropriate title
-            popupTitle.textContent = 'បញ្ជាក់ការចូលរួម - បានចូលរួម';
-            popupOverlay.classList.add('show');
-          });
-          
-          notAttendButton.addEventListener('click', function() {
-            notAttendButton.classList.add('selected');
-            attendButton.classList.remove('selected');
-            currentSelection = 'not_attending';
-            attendanceField.value = 'not_attending';
-            
-            // Show popup with appropriate title
-            popupTitle.textContent = 'បញ្ជាក់ការចូលរួម - មិនបានចូលរួម';
-            popupOverlay.classList.add('show');
-          });
-        }
-        
-        // Close popup on cancel or X click
-        popupClose.addEventListener('click', function() {
-          popupOverlay.classList.remove('show');
-        });
-        
-        popupCancel.addEventListener('click', function() {
-          popupOverlay.classList.remove('show');
-        });
-        
-        // Handle popup submit
-        popupSubmit.addEventListener('click', function() {
-          // Get comments from popup textarea and set to hidden form field
-          commentsField.value = popupComments.value;
-          
-          // Close popup
-          popupOverlay.classList.remove('show');
-          
-          // Submit the form
-          submitForm();
-        });
-        
-        // Form submission function
-        function submitForm() {
-          // Make sure an attendance option is selected
-          if (!attendanceField.value) {
-            alert('Please select if you will attend or not.');
-            return;
-          }
-          
-          // Prepare form data
-          const formData = new FormData(rsvpForm);
-          
-          // Create a response object to store locally
-          const responseData = {
-            guestId: guestId,
-            guestName: document.getElementById('guest-name-field').value,
-            attendance: attendanceField.value,
-            comments: commentsField.value,
-            timestamp: document.getElementById('timestamp-field').value
-          };
-          
-          // Store the response locally to prevent duplicate submissions
-          localStorage.setItem(`wedding_response_${guestId}`, JSON.stringify(responseData));
-          
-          // Submit form to Netlify
-          fetch('/', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams(formData).toString()
-          }).then(() => {
-            // Disable buttons and show thank you message
-            attendButton.disabled = true;
-            notAttendButton.disabled = true;
-            thankYouMessage.classList.add('show');
-          }).catch((error) => {
-            alert('Oops! There was a problem submitting your response: ' + error.message);
-          });
-        }
-        
-        // Prevent form submission through the normal method since we're using the popup
-        rsvpForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          // We won't actually submit here, it's handled by the popup submit button
-        });
-        
-        // Function to open maps with coordinates
-        window.openMaps = function(event, coordinates) {
-          var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-          
-          // Check if device is iOS
-          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            window.location.href = "comgooglemaps://?q=" + coordinates;
-          } 
-          // Check if device is Android
-          else if (/android/i.test(userAgent)) {
-            window.location.href = "geo:" + coordinates;
-          } 
-          // Default to web URL
-          else {
-            return true; // Let the default link action happen
-          }
-          
-          event.preventDefault();
-          return false;
-        };
-      });
+      // REPLACE your script section with this version
+// The key change is that all functions are now properly defined within the DOMContentLoaded event listener
 
-      // Add this to your existing script
-      document.addEventListener('DOMContentLoaded', function() {
-        // Detect if running in Telegram WebView
-        const isTelegramWebView = navigator.userAgent.includes('Telegram') || 
-                                window.navigator.userAgent.includes('TelegramBot');
-        
-        if (isTelegramWebView) {
-          // Apply Telegram-specific fixes
-          document.body.style.height = 'auto';
-          document.body.style.overflow = 'auto';
-          document.documentElement.style.overflow = 'auto';
-          
-          // Force redraw to help with rendering issues
-          setTimeout(function() {
-            window.scrollTo(0, 1);
-            window.scrollTo(0, 0);
-          }, 500);
-          
-          // Add a class to body for Telegram-specific CSS
-          document.body.classList.add('telegram-webview');
-        }
-      });
-      function resetRsvpForm() {
+window.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.container');
+  const envelope = document.querySelector('.envelope-wrapper');
+  const letter = document.querySelector('.letter');
+  const rsvpSection = document.querySelector('.rsvp-section');
+  const scrollIndicator = document.getElementById('scroll-indicator');
+  
+  // Popup elements
+  const popupOverlay = document.getElementById('popup-overlay');
+  const popupClose = document.getElementById('popup-close');
+  const popupTitle = document.getElementById('popup-title');
+  const popupComments = document.getElementById('popup-comments');
+  const popupCancel = document.getElementById('popup-cancel');
+  const popupSubmit = document.getElementById('popup-submit');
+  const thankYouMessage = document.getElementById('thank-you-message');
+  
+  // RSVP elements
+  const attendButton = document.getElementById('attend-button');
+  const notAttendButton = document.getElementById('not-attend-button');
+  const attendanceField = document.getElementById('attendance-field');
+  const commentsField = document.getElementById('comments-field');
+  const rsvpForm = document.getElementById('rsvp-form');
+  
+  // Function to reset the form for a new submission
+  function resetRsvpForm() {
   // Reset form fields and appearance
   attendanceField.value = '';
   commentsField.value = '';
@@ -1678,28 +1509,52 @@ body.telegram-webview .rsvp-container {
   
   // Clear textarea
   popupComments.value = '';
+  
+  // Ensure the container min-height is reset
+  const rsvpContainer = document.querySelector('.rsvp-container');
+  if (rsvpContainer) {
+    rsvpContainer.classList.remove('with-edit-button');
+    console.log('Reset rsvp-container min-height to 125vh');
+  }
+  
+  console.log('Form has been reset for a new submission');
 }
-
-// Function to add an "Edit Response" button
-function addNewSubmissionButton() {
+  
+  // Function to add an "Edit Response" button
+  function addNewSubmissionButton() {
   // Check if button already exists
   if (document.getElementById('new-submission-button')) {
+    console.log('Edit button already exists, not creating a new one');
     return;
+  }
+  
+  console.log('Creating new submission button...');
+  
+  // Increase container height by adding the class
+  const rsvpContainer = document.querySelector('.rsvp-container');
+  if (rsvpContainer) {
+    rsvpContainer.classList.add('with-edit-button');
+    console.log('Increased rsvp-container min-height to 130vh');
   }
   
   // Create a new button element
   const newSubmissionButton = document.createElement('button');
   newSubmissionButton.type = 'button';
-  newSubmissionButton.className = 'rsvp-button';
+  newSubmissionButton.className = 'edit-response-button';
   newSubmissionButton.id = 'new-submission-button';
-  newSubmissionButton.style.marginTop = '15px';
-  newSubmissionButton.style.backgroundColor = '#e8f0f8';
-  newSubmissionButton.style.color = '#333';
-  newSubmissionButton.style.fontSize = '1rem';
   newSubmissionButton.textContent = 'កែប្រែចម្លើយ';  // Edit Response in Khmer
   
   // Add click event listener
   newSubmissionButton.addEventListener('click', function() {
+    console.log('Edit button clicked');
+    
+    // Reset the min-height when the button is clicked
+    if (rsvpContainer) {
+      rsvpContainer.classList.remove('with-edit-button');
+      console.log('Reset rsvp-container min-height to 125vh');
+    }
+    
+    // Reset the form
     resetRsvpForm();
     
     // Remove this button after click
@@ -1710,12 +1565,103 @@ function addNewSubmissionButton() {
   
   // Insert the button after the thank you message
   thankYouMessage.parentNode.insertBefore(newSubmissionButton, thankYouMessage.nextSibling);
+  console.log('New submission button has been added');
 }
 
-// REPLACE these two functions in your existing script:
-
-// REPLACE your existing submitForm function with this one:
-function submitForm() {
+  // Start envelope animation sequence with a slight delay
+  setTimeout(() => {
+    envelope.classList.add('flap'); // Open envelope
+    // Add zoom effect after the envelope starts to open
+    setTimeout(() => {
+      container.classList.add('zoom'); // Zoom in
+    }, 1000);
+    // Set the z-index after 1.2 seconds
+    setTimeout(() => {
+      letter.classList.add('top-z'); // Apply high z-index class
+    }, 1200);
+    // Show RSVP section after the envelope animation
+    setTimeout(() => {
+      rsvpSection.classList.add('show');
+      if (scrollIndicator) {
+        scrollIndicator.classList.add('show');
+      }
+    }, 1500);
+  }, 500);
+  
+  // Function to get URL parameters to identify the guest
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+  
+  // Generate device ID if not already stored
+  function generateDeviceId() {
+    let deviceId = localStorage.getItem('wedding_invitation_device_id');
+    if (!deviceId) {
+      deviceId = 'device_' + Math.random().toString(36).substring(2, 15);
+      localStorage.setItem('wedding_invitation_device_id', deviceId);
+    }
+    return deviceId;
+  }
+  
+  // Handle checking if a response has already been submitted - MODIFIED for multiple submissions
+  function checkPreviousResponse(guestId) {
+    // Get all keys from localStorage that start with the guestId
+    const keys = Object.keys(localStorage).filter(key => 
+      key.startsWith(`wedding_response_${guestId}_`));
+    
+    if (keys.length > 0) {
+      console.log('Found previous responses:', keys.length);
+      
+      // Sort keys by timestamp (newest first)
+      keys.sort().reverse();
+      
+      // Get the most recent response
+      const mostRecentKey = keys[0];
+      const responseData = JSON.parse(localStorage.getItem(mostRecentKey));
+      
+      console.log('Most recent response:', responseData);
+      
+      // Show the most recent response as selected
+      if (responseData.attendance === 'attending') {
+        attendButton.classList.add('selected');
+        attendButton.disabled = true;
+        notAttendButton.disabled = true;
+      } else if (responseData.attendance === 'not_attending') {
+        notAttendButton.classList.add('selected');
+        attendButton.disabled = true;
+        notAttendButton.disabled = true;
+      }
+      
+      // Show the thank you message
+      thankYouMessage.classList.add('show');
+      
+      // Add button to make a new submission
+      addNewSubmissionButton();
+      
+      return true;
+    }
+    
+    console.log('No previous responses found');
+    return false;
+  }
+  
+  // Update guest name in the invitation
+  function updateGuestName() {
+    const guestNameParam = getQueryParam('name');
+    const guestNameElement = document.getElementById('guest-name-placeholder');
+    
+    if (guestNameParam && guestNameElement) {
+      const decodedName = decodeURIComponent(guestNameParam);
+      guestNameElement.textContent = decodedName;
+      
+      // Also update the hidden field for the form
+      document.getElementById('guest-name-field').value = decodedName;
+    }
+  }
+  
+  // Form submission function - MODIFIED for multiple submissions
+  function submitForm() {
   // Make sure an attendance option is selected
   if (!attendanceField.value) {
     alert('Please select if you will attend or not.');
@@ -1738,6 +1684,8 @@ function submitForm() {
     timestamp: document.getElementById('timestamp-field').value
   };
   
+  console.log('Submitting form with data:', responseData);
+  
   // Store this submission in localStorage with a unique timestamp key
   const submissionKey = `wedding_response_${guestId}_${submissionTimestamp}`;
   localStorage.setItem(submissionKey, JSON.stringify(responseData));
@@ -1750,6 +1698,8 @@ function submitForm() {
     },
     body: new URLSearchParams(formData).toString()
   }).then(() => {
+    console.log('Form submitted successfully');
+    
     // Temporarily disable buttons and show thank you message
     attendButton.disabled = true;
     notAttendButton.disabled = true;
@@ -1759,46 +1709,118 @@ function submitForm() {
     addNewSubmissionButton();
     
   }).catch((error) => {
+    console.error('Error submitting form:', error);
     alert('Oops! There was a problem submitting your response: ' + error.message);
   });
 }
-
-// REPLACE your existing checkPreviousResponse function with this one:
-function checkPreviousResponse(guestId) {
-  // Get all keys from localStorage that start with the guestId
-  const keys = Object.keys(localStorage).filter(key => 
-    key.startsWith(`wedding_response_${guestId}_`));
+  // Set up guest tracking
+  const guestId = getQueryParam('guest') || 'unknown_guest';
+  const deviceId = generateDeviceId();
   
-  if (keys.length > 0) {
-    // Sort keys by timestamp (newest first)
-    keys.sort().reverse();
+  // Update hidden fields
+  document.getElementById('guest-id-field').value = guestId;
+  document.getElementById('device-id-field').value = deviceId;
+  document.getElementById('timestamp-field').value = new Date().toISOString();
+  
+  // Update guest name in the invitation
+  updateGuestName();
+  
+  // Check if this guest has already responded
+  const hasResponded = checkPreviousResponse(guestId);
+  console.log('Has previous response:', hasResponded);
+  
+  // RSVP buttons functionality
+  attendButton.addEventListener('click', function() {
+    attendButton.classList.add('selected');
+    notAttendButton.classList.remove('selected');
+    attendanceField.value = 'attending';
     
-    // Get the most recent response
-    const mostRecentKey = keys[0];
-    const responseData = JSON.parse(localStorage.getItem(mostRecentKey));
+    // Show popup with appropriate title
+    popupTitle.textContent = 'បញ្ជាក់ការចូលរួម - បានចូលរួម';
+    popupOverlay.classList.add('show');
+  });
+  
+  notAttendButton.addEventListener('click', function() {
+    notAttendButton.classList.add('selected');
+    attendButton.classList.remove('selected');
+    attendanceField.value = 'not_attending';
     
-    // Show the most recent response as selected
-    if (responseData.attendance === 'attending') {
-      attendButton.classList.add('selected');
-      attendButton.disabled = true;
-      notAttendButton.disabled = true;
-    } else if (responseData.attendance === 'not_attending') {
-      notAttendButton.classList.add('selected');
-      attendButton.disabled = true;
-      notAttendButton.disabled = true;
+    // Show popup with appropriate title
+    popupTitle.textContent = 'បញ្ជាក់ការចូលរួម - មិនបានចូលរួម';
+    popupOverlay.classList.add('show');
+  });
+  
+  // Close popup on cancel or X click
+  popupClose.addEventListener('click', function() {
+    popupOverlay.classList.remove('show');
+  });
+  
+  popupCancel.addEventListener('click', function() {
+    popupOverlay.classList.remove('show');
+  });
+  
+  // Handle popup submit
+  popupSubmit.addEventListener('click', function() {
+    // Get comments from popup textarea and set to hidden form field
+    commentsField.value = popupComments.value;
+    
+    // Close popup
+    popupOverlay.classList.remove('show');
+    
+    // Submit the form
+    submitForm();
+  });
+  
+  // Prevent form submission through the normal method since we're using the popup
+  rsvpForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    // We won't actually submit here, it's handled by the popup submit button
+  });
+  
+  // Function to open maps with coordinates
+  window.openMaps = function(event, coordinates) {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Check if device is iOS
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      window.location.href = "comgooglemaps://?q=" + coordinates;
+    } 
+    // Check if device is Android
+    else if (/android/i.test(userAgent)) {
+      window.location.href = "geo:" + coordinates;
+    } 
+    // Default to web URL
+    else {
+      return true; // Let the default link action happen
     }
     
-    // Show the thank you message
-    thankYouMessage.classList.add('show');
-    
-    // Add button to make a new submission
-    addNewSubmissionButton();
-    
-    return true;
-  }
+    event.preventDefault();
+    return false;
+  };
+});
+
+// Detect Telegram WebView (keep this outside the main event listener)
+document.addEventListener('DOMContentLoaded', function() {
+  // Detect if running in Telegram WebView
+  const isTelegramWebView = navigator.userAgent.includes('Telegram') || 
+                          window.navigator.userAgent.includes('TelegramBot');
   
-  return false;
-}
+  if (isTelegramWebView) {
+    // Apply Telegram-specific fixes
+    document.body.style.height = 'auto';
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    
+    // Force redraw to help with rendering issues
+    setTimeout(function() {
+      window.scrollTo(0, 1);
+      window.scrollTo(0, 0);
+    }, 500);
+    
+    // Add a class to body for Telegram-specific CSS
+    document.body.classList.add('telegram-webview');
+  }
+});
     </script>
     
   </body>
