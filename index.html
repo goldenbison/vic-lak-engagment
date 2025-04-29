@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
+    <title>V & L Engagement Invitation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&family=Hanuman:wght@300;400;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
         font-weight: 100;
         font-style: normal;
       }
-
+      
       :root {
         font-size: calc(14px + 0.5vw);
         --primary: white;
@@ -486,11 +486,11 @@
       }
 
       .flower-right-1 {
-        top: 40px;
-        right: -150px;
-        width: 140px;
-        height: 140px;
-        transform: rotate(-65deg);
+          top: 10px;
+          right: -100px;
+          width: 120px;
+          height: 140px;
+          transform: rotate(175deg);
       }
 
       .flower-right-2 {
@@ -502,54 +502,56 @@
       }
 
       .flower-top-left-1 {
-        /* bottom: -85px; */
-        right: 115px;
-        width: 90px;
-        height: 120px;
-        transform: rotate(15deg);
+          top: -60px;
+          right: 95px;
+          width: 120px;
+          height: 120px;
+          transform: rotate(215deg);
+          z-index: 5;
       }
 
       .flower-top-left-2 {
-        /* bottom: -25px; */
-        top: -30px;
-        right: 60px;
-        width: 120px;
-        height: 120px;
-        transform: rotate(70deg);
+          /* bottom: -25px; */
+          top: -30px;
+          /* right: 60px; */
+          width: 120px;
+          height: 120px;
+          transform: rotate(75deg);
       }
 
       .flower-top-left-3 {
-        bottom: 20px;
-        top: -20px;
-        right: 105px;
-        width: 100px;
-        height: 100px;
-        transform: rotate(25deg);
+          bottom: 20px;
+          top: 20px;
+          right: 70px;
+          width: 120px;
+          height: 120px;
+          transform: rotate(15deg);
       }
 
       .flower-bottom-left-1 {
-        bottom: -85px;
-        right: 70px;
-        width: 150px;
-        height: 150px;
-        transform: rotate(85deg);
-      }
+        top: -75px;
+        left: 90px;
+        width: 120px;
+        height: 120px;
+        transform: rotate(241deg);
+        } 
 
-      .flower-bottom-left-2 {
-        bottom: -25px;
-        right: 10px;
-        width: 110px;
-        height: 110px;
-        transform: rotate(265deg);
-      }
+        .flower-bottom-left-2 {
+    top: -5px;
+    left: 160px;
+    width: 110px;
+    height: 110px;
+    transform: rotate(301deg);
+}
 
-      .flower-bottom-left-3 {
-        bottom: -15px;
-        right: 110px;
-        width: 100px;
-        height: 100px;
-        transform: rotate(-15deg);
-      }
+
+.flower-bottom-left-3 {
+    top: -25px;
+    left: 170px;
+    width: 120px;
+    height: 120px;
+    transform: rotate(331deg);
+}
 
       /* Content styling */
       .content {
@@ -566,28 +568,44 @@
       .title {
         font-family: 'Moul', 'Hanuman', serif;
         color: #222;
-        font-size: 1rem;
+        font-size: 0.75rem;
         text-align: center;
-        line-height: 0.40;
-        margin: 10px 0;
       }
 
       .invitation-text {
-        font-family: 'Moul', 'Hanuman', serif;
-        color: #222;
-        font-size: 0.7rem;
-        width: 90%;
-        margin: 1rem auto;
-        line-height: 1.85;
-        text-align: center;
+          font-family: 'Moul', 'Hanuman', serif;
+          color: #222;
+          font-size: 0.65rem;
+          width: 90%;
+          margin-top: 10px;
+          margin-bottom: 5px;
+          /* line-height: 1.85; */
+          text-align: center;
+      }
+
+      .welcome-text {
+          font-family: 'Moul', 'Hanuman', serif;
+          color: #222;
+          font-size: 0.5rem;
+          width: 100%;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          text-align: center;
+      }
+
+      .welcome-line {
+          color: #222;
+          font-size: 0.45rem;
+          width: 90%;
+          text-align: center;
       }
 
       .date {
         font-family: 'Moul', 'Hanuman', serif;
         color: #222;
-        font-size: 0.7rem;
+        font-size: 0.55rem;
         width: 100%;
-        margin-top: 5px;
+        margin-top: 10px;
         text-align: center;
       }
 
@@ -1058,7 +1076,73 @@
 
       .thank-you-message.show {
         display: block;
+
       }
+
+      .rings-container {
+    text-align: center;
+    top:25px;
+    margin-bottom: 20px;
+    z-index: 3;
+    position: relative;
+  }
+  
+  .rings-image {
+    width: 50px; /* Adjust size as needed */
+    height: auto;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    animation: gentle-shine 3s infinite alternate;
+  }
+  
+  @keyframes gentle-shine {
+    0% {
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    }
+    100% {
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) brightness(1.05);
+    }
+  }
+
+  .guest-name-box {
+    width: 80%;
+    /* margin: 15px auto; */
+    /* padding: 10px 15px; */
+    background-color: white;
+    border: 1.5px solid #9c8f7f;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    min-height: 20px;
+}
+
+.guest-name-text {
+  font-family: 'Moul', 'Hanuman', cursive, serif;
+  color: black;
+  font-size: 0.4rem;
+  /* Fix the line height for proper vertical alignment */
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  /* These ensure the text is centered within the span */
+  display: inline-block;
+  width: 100%;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 375px) {
+  .guest-name-box {
+    width: 85%;
+    min-height: 35px;
+  }
+  
+  .guest-name-text {
+    font-size: 0.45rem;
+  }
+}
     </style>
   </head>
   <body>
@@ -1083,15 +1167,25 @@
               <div class="flower flower-top-left-2"></div>
               <div class="flower flower-top-left-3"></div>
               <div class="flower flower-right-1"></div>
-              <div class="flower flower-right-2"></div>
+              <!-- <div class="flower flower-right-2"></div> -->
               <div class="flower flower-bottom-left-1"></div>
               <div class="flower flower-bottom-left-2"></div>
               <div class="flower flower-bottom-left-3"></div>
               <div class="content">
+                <div class="rings-container">
+                  <img src="./rings.png" alt="Wedding Rings" class="rings-image">
+                </div>
                 <p class="title">ខូវ ទី វិកទ័រ</p>
-                <p class="title" style="font-size: 13px !important;">និង</p>
-                <p class="title">និត លុចលក្ខណា</p>
-                <p class="invitation-text">សូមគោរពអញ្ជើញ <br />ចូលរួមពិធីភ្ជាប់ពាក្យ </p>
+                <p class="title" style="font-size: 0.5rem !important;">និង</p>
+                <p class="title" style="padding-bottom: 5px;">និត លុចលក្ខណា</p>
+                <p class="invitation-text">សិរីសួស្តីពិធីភ្ជាប់ពាក្យ </p>
+                <p class="welcome-line">· · ─────── ·❁· ─────── · ·</p>
+                
+                <p class="welcome-text">សូមគោរពអញ្ជើញ</p>
+
+                <div class="guest-name-box">
+                  <span id="guest-name-placeholder" class="guest-name-text">ឯកឧត្តម ម៉ៅ គង្គា នឹង លោកជំទាវ</span>
+                </div>
                 <p class="date">០១​ មិថុនា​ ២០២៥</p>
               </div>
             </div>
@@ -1107,15 +1201,16 @@
           <h2 class="rsvp-title">សូមបញ្ជាក់ការចូលរួម</h2>
           <form name="rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="rsvp-form">
             <div style="display:none">
-              <label>Don't fill this out if you're human: <input name="bot-field" />
-              </label>
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
             </div>
-            <!-- Hidden fields for Netlify form handling -->
+            <!-- Updated hidden fields for Netlify form handling -->
             <input type="hidden" name="form-name" value="rsvp" />
             <input type="hidden" name="guest-id" id="guest-id-field" />
+            <input type="hidden" name="guest-name" id="guest-name-field" />
             <input type="hidden" name="device-id" id="device-id-field" />
             <input type="hidden" name="attendance" id="attendance-field" value="" />
-            <input type="hidden" name="comments" id="comments" value="" />
+            <input type="hidden" name="comments" id="comments-field" value="" />
+            <input type="hidden" name="timestamp" id="timestamp-field" />
             <div class="rsvp-buttons">
               <button type="button" class="rsvp-button" id="attend-button">នឹងចូលរួម</button>
               <button type="button" class="rsvp-button" id="not-attend-button">មិនបានចូលរួម</button>
@@ -1127,7 +1222,7 @@
               <p class="detail-heading">កាលបរិច្ឆេទ និងពេលវេលា</p>
               <p class="detail-content underlined">០១ មិថុនា ២០២៥</p>
               <br />
-              <p class="detail-content underlined">៧:០០ ព្រឹក - ៩:០០ រសៀល</p>
+              <p class="detail-content underlined">៨:០០ ព្រឹក - ១១:០០ ព្រឹក</p>
             </div>
             <div class="detail-section">
               <p class="detail-heading">ទីកន្លែង</p>
@@ -1188,6 +1283,7 @@
         const letter = document.querySelector('.letter');
         const rsvpSection = document.querySelector('.rsvp-section');
         const scrollIndicator = document.getElementById('scroll-indicator');
+        
         // Popup elements
         const popupOverlay = document.getElementById('popup-overlay');
         const popupClose = document.getElementById('popup-close');
@@ -1196,12 +1292,14 @@
         const popupCancel = document.getElementById('popup-cancel');
         const popupSubmit = document.getElementById('popup-submit');
         const thankYouMessage = document.getElementById('thank-you-message');
+        
         // RSVP elements
         const attendButton = document.getElementById('attend-button');
         const notAttendButton = document.getElementById('not-attend-button');
         const attendanceField = document.getElementById('attendance-field');
-        const commentsField = document.getElementById('comments');
+        const commentsField = document.getElementById('comments-field');
         const rsvpForm = document.getElementById('rsvp-form');
+        
         // Start envelope animation sequence with a slight delay
         setTimeout(() => {
           envelope.classList.add('flap'); // Open envelope
@@ -1216,78 +1314,133 @@
           // Show RSVP section after the envelope animation
           setTimeout(() => {
             rsvpSection.classList.add('show');
-            scrollIndicator.classList.add('show');
+            if (scrollIndicator) {
+              scrollIndicator.classList.add('show');
+            }
           }, 1500);
         }, 500);
-        // Add scroll functionality for "Scroll to RSVP" indicator
-        scrollIndicator.addEventListener('click', () => {
-          document.getElementById('rsvp-section').scrollIntoView({
-            behavior: 'smooth'
-          });
-        });
-        // Generate and store unique device/guest ID
-        function generateDeviceId() {
-          // Try to get existing ID from localStorage
-          let deviceId = localStorage.getItem('wedding_invitation_device_id');
-          // If no existing ID, create a new one
-          if (!deviceId) {
-            deviceId = 'device_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            localStorage.setItem('wedding_invitation_device_id', deviceId);
-          }
-          return deviceId;
-        }
-        // Get URL parameters to identify the guest (optional)
+        
+        // Function to get URL parameters to identify the guest
         function getQueryParam(param) {
           const urlParams = new URLSearchParams(window.location.search);
           return urlParams.get(param);
         }
+        
+        // Generate device ID if not already stored
+        function generateDeviceId() {
+          let deviceId = localStorage.getItem('wedding_invitation_device_id');
+          if (!deviceId) {
+            deviceId = 'device_' + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('wedding_invitation_device_id', deviceId);
+          }
+          return deviceId;
+        }
+        
+        // Handle checking if a response has already been submitted
+        function checkPreviousResponse(guestId) {
+          const responseKey = `wedding_response_${guestId}`;
+          const previousResponse = localStorage.getItem(responseKey);
+          
+          if (previousResponse) {
+            const responseData = JSON.parse(previousResponse);
+            
+            // Disable buttons
+            attendButton.disabled = true;
+            notAttendButton.disabled = true;
+            
+            // Show the thank you message
+            thankYouMessage.classList.add('show');
+            
+            // Set the appearance based on previous selection
+            if (responseData.attendance === 'attending') {
+              attendButton.classList.add('selected');
+            } else if (responseData.attendance === 'not_attending') {
+              notAttendButton.classList.add('selected');
+            }
+            
+            return true;
+          }
+          
+          return false;
+        }
+        
+        // Update guest name in the invitation
+        function updateGuestName() {
+          const guestNameParam = getQueryParam('name');
+          const guestNameElement = document.getElementById('guest-name-placeholder');
+          
+          if (guestNameParam && guestNameElement) {
+            const decodedName = decodeURIComponent(guestNameParam);
+            guestNameElement.textContent = decodedName;
+            
+            // Also update the hidden field for the form
+            document.getElementById('guest-name-field').value = decodedName;
+          }
+        }
+        
         // Set up guest tracking
         const guestId = getQueryParam('guest') || 'unknown_guest';
         const deviceId = generateDeviceId();
+        
         // Update hidden fields
         document.getElementById('guest-id-field').value = guestId;
         document.getElementById('device-id-field').value = deviceId;
-        // Update displayed guest name if provided
-        const guestNameParam = getQueryParam('name');
-        if (guestNameParam && document.getElementById('guest-name')) {
-          document.getElementById('guest-name').textContent = decodeURIComponent(guestNameParam);
+        document.getElementById('timestamp-field').value = new Date().toISOString();
+        
+        // Update guest name in the invitation
+        updateGuestName();
+        
+        // Check if this guest has already responded
+        const hasResponded = checkPreviousResponse(guestId);
+        
+        if (!hasResponded) {
+          // RSVP buttons functionality (only set up if not yet responded)
+          let currentSelection = '';
+          
+          attendButton.addEventListener('click', function() {
+            attendButton.classList.add('selected');
+            notAttendButton.classList.remove('selected');
+            currentSelection = 'attending';
+            attendanceField.value = 'attending';
+            
+            // Show popup with appropriate title
+            popupTitle.textContent = 'បញ្ជាក់ការចូលរួម - បានចូលរួម';
+            popupOverlay.classList.add('show');
+          });
+          
+          notAttendButton.addEventListener('click', function() {
+            notAttendButton.classList.add('selected');
+            attendButton.classList.remove('selected');
+            currentSelection = 'not_attending';
+            attendanceField.value = 'not_attending';
+            
+            // Show popup with appropriate title
+            popupTitle.textContent = 'បញ្ជាក់ការចូលរួម - មិនបានចូលរួម';
+            popupOverlay.classList.add('show');
+          });
         }
-        // RSVP buttons functionality
-        let currentSelection = '';
-        attendButton.addEventListener('click', function() {
-          attendButton.classList.add('selected');
-          notAttendButton.classList.remove('selected');
-          currentSelection = 'attending';
-          attendanceField.value = 'attending';
-          // Show popup with appropriate title
-          popupTitle.textContent = 'បញ្ជាក់ការចូលរួម - បានចូលរួម';
-          popupOverlay.classList.add('show');
-        });
-        notAttendButton.addEventListener('click', function() {
-          notAttendButton.classList.add('selected');
-          attendButton.classList.remove('selected');
-          currentSelection = 'not_attending';
-          attendanceField.value = 'not_attending';
-          // Show popup with appropriate title
-          popupTitle.textContent = 'បញ្ជាក់ការចូលរួម - មិនបានចូលរួម';
-          popupOverlay.classList.add('show');
-        });
+        
         // Close popup on cancel or X click
         popupClose.addEventListener('click', function() {
           popupOverlay.classList.remove('show');
         });
+        
         popupCancel.addEventListener('click', function() {
           popupOverlay.classList.remove('show');
         });
+        
         // Handle popup submit
         popupSubmit.addEventListener('click', function() {
           // Get comments from popup textarea and set to hidden form field
           commentsField.value = popupComments.value;
+          
           // Close popup
           popupOverlay.classList.remove('show');
+          
           // Submit the form
           submitForm();
         });
+        
         // Form submission function
         function submitForm() {
           // Make sure an attendance option is selected
@@ -1295,8 +1448,22 @@
             alert('Please select if you will attend or not.');
             return;
           }
+          
           // Prepare form data
           const formData = new FormData(rsvpForm);
+          
+          // Create a response object to store locally
+          const responseData = {
+            guestId: guestId,
+            guestName: document.getElementById('guest-name-field').value,
+            attendance: attendanceField.value,
+            comments: commentsField.value,
+            timestamp: document.getElementById('timestamp-field').value
+          };
+          
+          // Store the response locally to prevent duplicate submissions
+          localStorage.setItem(`wedding_response_${guestId}`, JSON.stringify(responseData));
+          
           // Submit form to Netlify
           fetch('/', {
             method: 'POST',
@@ -1313,32 +1480,33 @@
             alert('Oops! There was a problem submitting your response: ' + error.message);
           });
         }
+        
         // Prevent form submission through the normal method since we're using the popup
         rsvpForm.addEventListener('submit', function(e) {
           e.preventDefault();
           // We won't actually submit here, it's handled by the popup submit button
         });
+        
         // Function to open maps with coordinates
-        
-        function openMaps(event, coordinates) {
-        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        
-        // Check if device is iOS
-        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.openMaps = function(event, coordinates) {
+          var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+          
+          // Check if device is iOS
+          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             window.location.href = "comgooglemaps://?q=" + coordinates;
-        } 
-        // Check if device is Android
-        else if (/android/i.test(userAgent)) {
+          } 
+          // Check if device is Android
+          else if (/android/i.test(userAgent)) {
             window.location.href = "geo:" + coordinates;
-        } 
-        // Default to web URL
-        else {
+          } 
+          // Default to web URL
+          else {
             return true; // Let the default link action happen
-        }
-        
-        event.preventDefault();
-        return false;
-    }
+          }
+          
+          event.preventDefault();
+          return false;
+        };
       });
     </script>
   </body>
