@@ -56,7 +56,6 @@
             margin-bottom: 30px;
             border-radius: 50px;
         }
-
         .content {
             z-index: 2;
             text-align: center;
@@ -169,47 +168,44 @@
                 height: 95vh;
             }
         }
-
         .guest-name-box {
-    width: 85%;
-    /* margin: 15px auto; */
-    /* padding: 10px 15px; */
-    background-color: white;
-    border: 3.5px solid #9c8f7f;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    margin:15px
-}
-
-.guest-name-text {
-  font-family: 'Moul', 'Hanuman', cursive, serif;
-  color: black;
-  font-size: 0.70rem;
-  /* Fix the line height for proper vertical alignment */
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-  /* These ensure the text is centered within the span */
-  display: inline-block;
-  width: 100%;
-}
-
-/* Media query for smaller screens */
-@media screen and (max-width: 375px) {
-  .guest-name-box {
-    width: 85%;
-    min-height: 35px;
-  }
-  
-  .guest-name-text {
-    font-size: 0.45rem;
-  }
-}
+            width: 85%;
+            /* margin: 15px auto; */
+            /* padding: 10px 15px; */
+            background-color: white;
+            border: 3.5px solid #9c8f7f;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            margin:15px
+        }
+        .guest-name-text {
+          font-family: 'Moul', 'Hanuman', cursive, serif;
+          color: black;
+          font-size: 0.70rem;
+          /* Fix the line height for proper vertical alignment */
+          line-height: 1.5;
+          margin: 0;
+          padding: 0;
+          /* These ensure the text is centered within the span */
+          display: inline-block;
+          width: 100%;
+        }
+        /* Media query for smaller screens */
+        @media screen and (max-width: 375px) {
+          .guest-name-box {
+            width: 85%;
+            min-height: 35px;
+          }
+          
+          .guest-name-text {
+            font-size: 0.45rem;
+          }
+        }
     </style>
 </head>
 <body>
@@ -228,16 +224,33 @@
             </div>
         </div>
     </div>
-
     <script>
-        document.getElementById('openInvitation').addEventListener('click', function() {
-            updateGuestName();
+        // Function to get URL parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        // Update guest name in the invitation if present in URL
+        function updateGuestName() {
+            const guestNameParam = getQueryParam('name');
+            const guestNameElement = document.getElementById('guest-name-placeholder');
+            
+            if (guestNameParam && guestNameElement) {
+                // Decode the URL-encoded name parameter
+                const decodedName = decodeURIComponent(guestNameParam);
+                guestNameElement.textContent = decodedName;
+            }
+        }
+        
+        // Call the function when the page loads
+        window.addEventListener('DOMContentLoaded', updateGuestName);
 
+        // Handle button click to navigate to main page
+        document.getElementById('openInvitation').addEventListener('click', function() {
             // Get the current URL parameters
             const currentUrl = window.location.href;
             const urlParams = new URLSearchParams(window.location.search);
-
-            
             
             // Check if there are any parameters
             if (urlParams.toString()) {
@@ -248,20 +261,6 @@
                 window.location.href = 'index-main.html';
             }
         });
-
-        // Update guest name in the invitation
-        function updateGuestName() {
-          const guestNameParam = getQueryParam('name');
-          const guestNameElement = document.getElementById('guest-name-placeholder');
-          
-          if (guestNameParam && guestNameElement) {
-            const decodedName = decodeURIComponent(guestNameParam);
-            guestNameElement.textContent = decodedName;
-            
-            // Also update the hidden field for the form
-            document.getElementById('guest-name-field').value = decodedName;
-          }
-        }
     </script>
 </body>
 </html>
