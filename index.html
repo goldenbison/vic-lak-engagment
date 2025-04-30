@@ -206,6 +206,32 @@
             font-size: 0.45rem;
           }
         }
+
+        /* Define a class for English text */
+        .english-text {
+            font-family: 'Pinyon Script', 'Tangerine', 'Great Vibes', cursive;
+            font-size: 1.1rem; /* Adjust this value as needed */
+        }
+
+        /* Add language detection for automatic styling */
+        /* This will apply to any element with the lang="en" attribute */
+        [lang="en"],
+        [lang="en-US"],
+        [lang="en-GB"] {
+            font-family: 'Pinyon Script', 'Tangerine', 'Great Vibes', cursive !important;
+            font-size: 110%; /* Make English text slightly larger */
+            font-weight: normal;
+        }
+
+        /* Add the font imports */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Tangerine:wght@400;700&display=swap');
+
+        /* Special override for guest name box if it contains English */
+        .guest-name-box[data-lang="en"] .guest-name-text {
+            font-family: 'Pinyon Script', 'Tangerine', 'Great Vibes', cursive;
+            font-size: 1.2rem; /* Larger size for English in the guest box */
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -235,11 +261,25 @@
         function updateGuestName() {
             const guestNameParam = getQueryParam('name');
             const guestNameElement = document.getElementById('guest-name-placeholder');
+            const guestNameBox = document.querySelector('.guest-name-box');
             
             if (guestNameParam && guestNameElement) {
                 // Decode the URL-encoded name parameter
                 const decodedName = decodeURIComponent(guestNameParam);
                 guestNameElement.textContent = decodedName;
+                
+                // Check if the text is primarily English
+                // Simple check: if it has more Latin characters than others
+                const englishPattern = /[a-zA-Z]/g;
+                const nonEnglishPattern = /[^\u0000-\u007F]/g;
+                
+                const englishChars = (decodedName.match(englishPattern) || []).length;
+                const nonEnglishChars = (decodedName.match(nonEnglishPattern) || []).length;
+                
+                // If it has more English characters than non-English
+                if (englishChars > nonEnglishChars) {
+                    guestNameBox.setAttribute('data-lang', 'en');
+                }
             }
         }
         
@@ -261,6 +301,8 @@
                 window.location.href = 'index-main.html';
             }
         });
+
+        
     </script>
 </body>
 </html>

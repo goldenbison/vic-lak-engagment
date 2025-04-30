@@ -1114,17 +1114,14 @@
     }
   }
 
-  .guest-name-box {
+  /* .guest-name-box {
     width: 80%;
-    /* margin: 15px auto; */
-    /* padding: 10px 15px; */
     background-color: white;
     border: 1.5px solid #9c8f7f;
     text-align: center;
     position: relative;
     z-index: 2;
-    display: flex
-;
+    display: flex;
     align-items: center;
     justify-content: center;
     min-height: 20px;
@@ -1134,13 +1131,32 @@
   font-family: 'Moul', 'Hanuman', cursive, serif;
   color: black;
   font-size: 0.4rem;
-  /* Fix the line height for proper vertical alignment */
   line-height: 1.5;
   margin: 0;
   padding: 0;
-  /* These ensure the text is centered within the span */
   display: inline-block;
   width: 100%;
+} */
+
+/* Hide the guest name box visually while keeping it functional */
+.guest-name-box {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    pointer-events: none; /* Prevents any mouse interaction */
+    opacity: 0; /* Make it fully transparent */
+    z-index: -999; /* Place it far behind other elements */
+}
+
+/* Make sure the guest name text is still loaded but not visible */
+.guest-name-text {
+    visibility: hidden;
 }
 
 /* Media query for smaller screens */
@@ -1456,10 +1472,12 @@ body.telegram-webview .rsvp-container {
                     <p class="couple-name right">និត <br/>លុចលក្ខណា</p>
                   </div>
                   
-                  <div class="guest-name-box" hidden>
+                  <div class="guest-name-box">
                     <span id="guest-name-placeholder" class="guest-name-text">ឯកឧត្តម នឹង លោកជំទាវ</span>
                   </div>
-                  <p class="date">០១​ មិថុនា​ ២០២៥</p>
+                  <!-- <p class="date">០១​ មិថុនា​ ២០២៥</p> -->
+                  <p class="invitation-details" style="font-weight: bolder; font-size: 0.4rem;">ត្រូវនឹងថ្ងៃទី ០១ មិថុនា​ ឆ្នាំ២០២៥ វេលាម៉ោង ៨:០០នាទីព្រឹក នៅ ផ្ទះលេខ ១១៦ ផ្លូវ ៦៥៤ សេនធ័រ សង្កាត់និរោធ ច្បារអំពៅ រាជធានីភ្នំពេញ
+                    ដោយមេត្រីភាព សូមអរគុណ ។</p>
                 </div>
               </div>
             </div>
