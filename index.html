@@ -27,6 +27,16 @@
             font-family: 'Moul', 'Hanuman', serif;
         }
         
+        /* Page wrapper with fixed width for desktop */
+        .page-wrapper {
+            max-width: 768px;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+            /* background-color: #f8f8f8; */
+        }
+        
         .welcome-container {
             width: 100%;
             height: 100vh;
@@ -39,16 +49,14 @@
             position: relative;
         }
         
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.1);
-            z-index: 1;
+        .button-container {
+            position: relative;
+            padding: 10px;
+            background-size: 100% 100%;
+            margin-bottom: 30px;
+            border-radius: 50px;
         }
-        
+
         .content {
             z-index: 2;
             text-align: center;
@@ -75,7 +83,6 @@
         .subtitle {
             color: #524c47;
             font-size: 1.8rem;
-            margin-bottom: 60px;
         }
         
         .open-button {
@@ -112,15 +119,7 @@
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
         }
         
-        .button-container {
-            position: relative;
-            padding: 10px;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAABACAYAAAD1Xam+AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUESURBVHgB7d3NbttGFIbhbxiKkhPESRcF0kW66arZZJd11tlkk3XQTTdFFwWKAoYBB3bi2JQpzfCnOMN5gDMJLcYUPXpJQhRF4hcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgv+bLX/JE3zdMcprm1/OJcrlcp9cl/v5YLvJjfr1ev19uvjycw+Ecu7rdP/vddYdw7ND3/+52R/1e5c/7dXuiXOf7w+lOH5b4/LVer4/fvlyjXH/Y83Ndhbj9qxF2v8YpPfvzbL9Hu95e79X9x+0Ifbvne8Mxb/a339drOunZn22/17jGLh+v0c9xvs991/O9x3H6dZ+O5/X1cU6P5fP1CfvmS76v/vk4Tvzxrvcxf5ifl+tx+nHjNn38sf9xP97G/f3YT4/r83P92t/OY5fPj8fn1+3jHR/nzWPkfk/3Nb3+5nG9jvfT4+Nju95eY9x2ftzxGHG7dd6e77pdr9Gv+fj+0vr79X69+X6u67eX67qN23uc19M5r/t9fIxP97F+7K/f0+0xp8fd3sP1/fu8fXO9fY/jPPn4fp7tdWNf7us8bv/5HPs+8utLObYY13M6Xtzvy+v5fHnFnYrz8+vV+v5yV/M6/+f5YV0+zMsP03yRt59n0XF9fHpYl8tpmq/W19f59aH0Lx/XL//69fH6/Xw2L+f5PLxfrmMPgCu9YQe48Q1jWpfT5fq6HN9fl/Px/Xy5Xi+fl3Wezo/L5TpdXy/n09N76+PH6VTWy9P6HKfLHG3n0/p+3D79/RznyeP6+HmM+XFdLpfzOrZ9j4/jnC7ndbvbZXo+z8/nc5wvLz+vP3+8/+lyPl/Ol/P5aXk6Xbbja+n7+Hx+jGnzPE7ntR3lfl+ePt/X1E7n0/XzuH06ny/leV7P5+k6/rHt5/M0leXpvDyf14/LdF2ezut2h+vY8/oy/vn83I5xPl+W6+vl+nw+l+VyXT9f1u0v5/V9jMv6+uU+58v68+vlus35fF6Wy/Vmv/Pxefo8P5/Wc1yW8+V8s368v+nx2Ndymd8v5+X6vD7fHpfpukzPrXqP4/O1jHFenv/ez+P2S9mPl2W5np/O682+yvx5f2U7t/X1fL3Zd1nP1+u0lPX6/Dy9X5/nZek/l/L1OI7ZPMft9dM5L++nfZ8vy9P7S3k+ltJ+fimlzMsc5yiv5VIu02WZL+VSmvW1Te93Pl/bUUrZf1nK5+t0ieO1s+X95q9lnj+/l3VfS5mi7dO1LGUq07q9xzmuz9vb3mI/3VLmx8s8t/l5Wd7Hfr7M8eMlXi/b71+W+fPj4z7L+vq6XB7jPD/fT+6v3B6jvC8/l69zKZ8f99I+Xz/+fXy8v3Xbl+u2n3LP1+3m7R+P+8++ljIv1/M0Tae5nOZ5Os9znKZ5nk95ms7TaZ7itT0/rdtO87RuM03TNE3n9etpmt4v07TsZ57W46f3yxTHr/cpTdM0vS/T+i9Oj+97v8z5Pm/36/s0TdM4Ro5xOl9e8zFOt2NEP+v78TjOHPfPx+XxUozzZRvn8Xq/muf1PVyjbZ/XiXVK2fc0xzHieVnPl/tr5bqUb9Zpfr/u83Apc7lfY9r2eYnnY57b+LmdU/nxcPjH9fD+4+vhULZ5+PB6/WE4HD4eDofDoRwOx0O5xnYf3sflh+O6nW4/lnL84/pfh71yHV//c8Gf/7H3D+/jPT3/2Q8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAX+R9PdIhMpKrSAwAAAABJRU5ErkJggg==') no-repeat;
-            background-size: 100% 100%;
-            margin-bottom: 30px;
-            border-radius: 50px;
-        }
-        
+        /* Responsive adjustments */
         @media screen and (max-width: 768px) {
             .title {
                 font-size: 1.8rem;
@@ -153,26 +152,92 @@
                 padding: 12px 25px;
             }
         }
+        
+        /* Desktop styling for tablet-like experience */
+        @media screen and (min-width: 1025px) {
+            body {
+                background-color: #f0f0f0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .page-wrapper {
+                border-radius: 10px;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                height: 95vh;
+            }
+        }
+
+        .guest-name-box {
+    width: 85%;
+    /* margin: 15px auto; */
+    /* padding: 10px 15px; */
+    background-color: white;
+    border: 3.5px solid #9c8f7f;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    margin:15px
+}
+
+.guest-name-text {
+  font-family: 'Moul', 'Hanuman', cursive, serif;
+  color: black;
+  font-size: 0.70rem;
+  /* Fix the line height for proper vertical alignment */
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  /* These ensure the text is centered within the span */
+  display: inline-block;
+  width: 100%;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 375px) {
+  .guest-name-box {
+    width: 85%;
+    min-height: 35px;
+  }
+  
+  .guest-name-text {
+    font-size: 0.45rem;
+  }
+}
     </style>
 </head>
 <body>
-    <div class="welcome-container">
-        <!-- <div class="overlay"></div> -->
-        <div class="content">
-            <img src="./logo.png" alt="Logo" class="logo">
-            <h1 class="title">សិរីសួស្តីពិធីភ្ជាប់ពាក្យ</h1>
-            <p class="subtitle">សូមគោរពអញ្ជើញ</p>
-            <div class="button-container">
-                <button class="open-button" id="openInvitation">សូម​ចុច​បើកសំបុត្រ</button>
+    <div class="page-wrapper">
+        <div class="welcome-container">
+            <div class="content">
+                <img src="./logo.png" alt="Logo" class="logo">
+                <h1 class="title">សិរីសួស្តីពិធីភ្ជាប់ពាក្យ</h1>
+                <p class="subtitle">សូមគោរពអញ្ជើញ</p>
+                <div class="guest-name-box">
+                    <span id="guest-name-placeholder" class="guest-name-text">ឯកឧត្តម នឹង លោកជំទាវ</span>
+                </div>
+                <div class="button-container">
+                    <button class="open-button" id="openInvitation">សូម​ចុច​បើកសំបុត្រ</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         document.getElementById('openInvitation').addEventListener('click', function() {
+            updateGuestName();
+
             // Get the current URL parameters
             const currentUrl = window.location.href;
             const urlParams = new URLSearchParams(window.location.search);
+
+            
             
             // Check if there are any parameters
             if (urlParams.toString()) {
@@ -183,6 +248,20 @@
                 window.location.href = 'index-main.html';
             }
         });
+
+        // Update guest name in the invitation
+        function updateGuestName() {
+          const guestNameParam = getQueryParam('name');
+          const guestNameElement = document.getElementById('guest-name-placeholder');
+          
+          if (guestNameParam && guestNameElement) {
+            const decodedName = decodeURIComponent(guestNameParam);
+            guestNameElement.textContent = decodedName;
+            
+            // Also update the hidden field for the form
+            document.getElementById('guest-name-field').value = decodedName;
+          }
+        }
     </script>
 </body>
 </html>
