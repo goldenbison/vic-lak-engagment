@@ -75,7 +75,7 @@
         max-width: 960px; /* Set your desired tablet-like width here */
         margin: 0 auto; /* Center the container */
         width: 100%;
-        min-height: 100vh;
+        min-height: 215vh;
         overflow-y: visible; /* Allow content to scroll */
         padding-top: clamp(1rem, 5vh, 3rem);
       }
@@ -697,11 +697,11 @@
         padding-bottom: 60px;
         position: relative;
         height: auto;
-        min-height: 125vh;
+        min-height: 135vh;
       }
 
       .rsvp-container.with-edit-button {
-        min-height: 130vh;
+        min-height: 150vh;
       }
 
       /* RSVP Section Styles */
@@ -1411,6 +1411,62 @@ body.telegram-webview .rsvp-container {
     width: 35px;
   }
 }
+
+/* Thank You and Apology Section Styling */
+.thanks-section {
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+}
+
+.thanks-title {
+  font-family: 'Moul', 'Hanuman', serif;
+  color: #524c47;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.thanks-content {
+  font-family: 'Hanuman', serif;
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* Responsive adaptations */
+@media screen and (max-width: 768px) {
+  .thanks-section {
+    padding: 15px;
+    max-width: 95%;
+  }
+  
+  .thanks-title {
+    font-size: 1.1rem;
+  }
+  
+  .thanks-content {
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .thanks-title {
+    font-size: 1rem;
+  }
+  
+  .thanks-content {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+}
     </style>
   </head>
   <body>
@@ -1548,6 +1604,15 @@ body.telegram-webview .rsvp-container {
         color: white;
     ">បង្ហាញផ្លូវនៅលើ Google Maps</span>
             </a>
+          </div>
+
+          <hr style="margin-top: 35px;margin-bottom: 20px;margin-left: 25px;margin-right: 25px;">
+          <!-- Thank You and Apology Section -->
+          <div class="thanks-section">
+            <h3 class="thanks-title">សេចក្តីថ្លែងអំណរគុណ និងសូមអភ័យទោស</h3>
+            <p class="thanks-content">
+              យើងខ្ញុំជាមាតាបិតា កូនទាំងពីរ សូមថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅទុកជាមុន ចំពោះវត្តមានដ៏ឧត្តុងឧត្តមរបស់ សម្តេច ឯកឧត្តម លោកជំទាវ លោកអ្នកឧកញ៉ា អ្នកឧញ៉ា ឧកញ៉ា លោក លោកស្រី អ្នកនាង កញ្ញា ដែលនឹងបានអញ្ជើញចូលរួមជាកិត្តិយស ក្នុងពិធីសិរីមង្គលភ្ជាប់ពាក្យកូនប្រុសកូនស្រីរបស់យើងខ្ញុំ នាពេលខាងមុខ ។  យើងខ្ញុំសូមការខន្តីអភ័យទោសដែលពុំបានជូនលិខិតអញ្ជើញដោយផ្ទាល់ ។  ដោយក្តីគោរពដ៏ខ្ពង់ខ្ពស់អំពីយើងខ្ញុំ ។
+            </p>
           </div>
         </section>
       </div>
