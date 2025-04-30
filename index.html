@@ -163,16 +163,26 @@
             <h1 class="title">សិរីសួស្តីពិធីភ្ជាប់ពាក្យ</h1>
             <p class="subtitle">សូមគោរពអញ្ជើញ</p>
             <div class="button-container">
-                <button class="open-button" onclick="window.location.href='index-main.html'">សូម​ចុច​បើកសំបុត្រ</button>
+                <button class="open-button" id="openInvitation">សូម​ចុច​បើកសំបុត្រ</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Redirect to the main page after a certain time (optional)
-        // setTimeout(function() {
-        //    window.location.href = 'index-main.html';
-        // }, 10000); // 10 seconds
+        document.getElementById('openInvitation').addEventListener('click', function() {
+            // Get the current URL parameters
+            const currentUrl = window.location.href;
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Check if there are any parameters
+            if (urlParams.toString()) {
+                // Redirect to index-main.html with the same parameters
+                window.location.href = 'index-main.html' + window.location.search;
+            } else {
+                // No parameters, just go to index-main.html
+                window.location.href = 'index-main.html';
+            }
+        });
     </script>
 </body>
 </html>
