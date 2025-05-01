@@ -10,7 +10,6 @@ const guestMap = {};
 
 // Map each guest to a short code
 // Format: guestMap["shortcode"] = "Full Guest Name";
-// Example: guestMap["g1"] = "ឯកឧត្តម ម៉ៅ គង្គា នឹង លោកជំទាវ";
 
 // Ming Lux and Pu Nith's Guests (g1-g28)
 guestMap["g1"] = "ឯកឧត្តម ម៉ៅ គង្គា នឹង លោកជំទាវ";
@@ -42,7 +41,7 @@ guestMap["g26"] = "លោក អេង អូដេ នឹង លោកស្រ
 guestMap["g27"] = "លោក ប៉ែន រ៉ាលីន";
 guestMap["g28"] = "លោក មាន សីហា នឹង លោកស្រី";
 
-// Mom and Dad's Guests (g29-g46)
+// Mom and Dad's Guests (g29-g54)
 guestMap["g29"] = "ឯកឧត្តម សុត ដែល្លី និង លោកជំទាវ";
 guestMap["g30"] = "បង អុន និង ក្មួយផល ក្មួយឌីនិងស្វាមី";
 guestMap["g31"] = "ក្មួយ គន្ធា និងស្វាមី";
@@ -61,49 +60,67 @@ guestMap["g43"] = "ក្មួយ សុផារី និង ស្វាម�
 guestMap["g44"] = "ជំទាវ អ៊ី សុង វួចនី និង ឯកឧត្តម ទៀ";
 guestMap["g45"] = "ចឹក សុង ង៉ុយ និងស៊ីម";
 guestMap["g46"] = "His Excellency Jean-François Tain";
+guestMap["g47"] = "លោក ប៉ែន ចាន់ដាវុធ និងភរិយា ព្រមទាំងក្មួយៗ";
+guestMap["g48"] = "លោក កេត សូថា និងភរិយា ព្រមទាំងក្មួយៗ";
+guestMap["g49"] = "លោក ផន សូឌី និងភរិយា ព្រមទាំងក្មួយៗ";
+guestMap["g50"] = "លោកស្រី ប៉ែន យុត្តិកា និង ក្មួយប្រុស";
+guestMap["g51"] = "លោក យស ចាន់ថារិទ្ធិ និងភរិយា ព្រមទាំងចៅ";
+guestMap["g52"] = "ក្មួយស្រី សុត សុជាតា";
+guestMap["g53"] = "លោកស្រី ខូវ ផល្លា និងក្មួយៗ";
+guestMap["g54"] = "លោកស្រី ខូវ រ៉ាវី និងក្មួយស្រី";
 
-// Keo's Guests (g47-g81)
-guestMap["g47"] = "Srun Sothaneth & Husband";
-guestMap["g48"] = "Sun Manich";
-guestMap["g49"] = "Ly Chanphallika";
-guestMap["g50"] = "Sor SreyKa";
-guestMap["g51"] = "Sok Nina";
-guestMap["g52"] = "Kun SopheaDonita";
-guestMap["g53"] = "Suon Boliza";
-guestMap["g54"] = "Im Liliza & Husband";
-guestMap["g55"] = "Tha Monyneath";
-guestMap["g56"] = "Kea Muyly & Husband";
-guestMap["g57"] = "Meas Sochivornmonineath";
-guestMap["g58"] = "Saly Vuthiya";
-guestMap["g59"] = "Seng Chonineath";
-guestMap["g60"] = "Kim MeyMey";
-guestMap["g61"] = "Sievlinh";
-guestMap["g62"] = "You Angelina";
-guestMap["g63"] = "Amber";
-guestMap["g64"] = "Tip Chanlinda";
-guestMap["g65"] = "Long Sreynith";
-guestMap["g66"] = "Phou Sreymai";
-guestMap["g67"] = "Mak Kunthea";
-guestMap["g68"] = "Ros Sopheakneath";
-guestMap["g69"] = "Lor Channet";
-guestMap["g70"] = "Chim Phithavro";
-guestMap["g71"] = "Dy Kimhour";
-guestMap["g72"] = "SkeelsRyan Kim";
-guestMap["g73"] = "Nyden";
-guestMap["g74"] = "Ly Rosa";
-guestMap["g75"] = "Celine";
-guestMap["g76"] = "Chris";
-guestMap["g77"] = "Pech Danin & Husband";
-guestMap["g78"] = "Keo Pisetraksmey";
-guestMap["g79"] = "Ching Long";
-guestMap["g80"] = "Molya";
-guestMap["g81"] = "Mouykim";
+// Keo's Guests (g55-g89)
+guestMap["g55"] = "Srun Sothaneth & Husband";
+guestMap["g56"] = "Sun Manich";
+guestMap["g57"] = "Ly Chanphallika";
+guestMap["g58"] = "Sor SreyKa";
+guestMap["g59"] = "Sok Nina";
+guestMap["g60"] = "Kun SopheaDonita";
+guestMap["g61"] = "Suon Boliza";
+guestMap["g62"] = "Im Liliza & Husband";
+guestMap["g63"] = "Tha Monyneath";
+guestMap["g64"] = "Kea Muyly & Husband";
+guestMap["g65"] = "Meas Sochivornmonineath";
+guestMap["g66"] = "Saly Vuthiya";
+guestMap["g67"] = "Seng Chonineath";
+guestMap["g68"] = "Kim MeyMey";
+guestMap["g69"] = "Sievlinh";
+guestMap["g70"] = "You Angelina";
+guestMap["g71"] = "Amber";
+guestMap["g72"] = "Tip Chanlinda";
+guestMap["g73"] = "Long Sreynith";
+guestMap["g74"] = "Phou Sreymai";
+guestMap["g75"] = "Mak Kunthea";
+guestMap["g76"] = "Ros Sopheakneath";
+guestMap["g77"] = "Lor Channet";
+guestMap["g78"] = "Chim Phithavro";
+guestMap["g79"] = "Dy Kimhour";
+guestMap["g80"] = "SkeelsRyan Kim";
+guestMap["g81"] = "Nyden";
+guestMap["g82"] = "Ly Rosa";
+guestMap["g83"] = "Celine";
+guestMap["g84"] = "Chris";
+guestMap["g85"] = "Pech Danin & Husband";
+guestMap["g86"] = "Keo Pisetraksmey";
+guestMap["g87"] = "Ching Long";
+guestMap["g88"] = "Molya";
+guestMap["g89"] = "Mouykim";
 
-// Victor's Guests (g82-g85)
-guestMap["g82"] = "Pen Pichponleur & Spouse";
-guestMap["g83"] = "Sok Rothoudom";
-guestMap["g84"] = "Mr. Sutharsan Chelladurai";
-guestMap["g85"] = "Chan Darapiseth";
+// Victor's Guests (g90-g94)
+guestMap["g90"] = "Pen Pichponleur & Spouse";
+guestMap["g91"] = "Sok Rothoudom";
+guestMap["g92"] = "Mr. Sutharsan Chelladurai";
+guestMap["g93"] = "Chan Darapiseth";
+guestMap["g94"] = "Sar Yotmorkoth & Heng Socheata";
+
+// Optionally add individual initials for easier link sharing
+// Examples:
+guestMap["JFT"] = "His Excellency Jean-François Tain"; // French guest
+guestMap["VC"] = "Mr. Sutharsan Chelladurai";          // Victor's colleague
+guestMap["SR"] = "Sok Rothoudom";                      // Special guest
+guestMap["SL"] = "Sievlinh";                           // Special guest
+guestMap["AM"] = "Amber";                              // Special guest
+guestMap["YM"] = "Sar Yotmorkoth & Heng Socheata";     // Special guest
 
 // Function to look up guest by short code and redirect as needed
 function handleGuestRedirect() {
