@@ -253,58 +253,92 @@
         </div>
     </div>
     <script>
-        // Function to get URL parameters
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
+        /// Function to get URL parameters
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Update guest name in the invitation if present in URL
+function updateGuestName() {
+    // Try first to use direct name parameter as before
+    const guestNameParam = getQueryParam('name');
+    const guestIdParam = getQueryParam('guest');
+    const guestCodeParam = getQueryParam('g'); // Look for shortened code parameter
+    
+    const guestNameElement = document.getElementById('guest-name-placeholder');
+    const guestNameBox = document.querySelector('.guest-name-box');
+    
+    if (guestNameParam && guestNameElement) {
+        // Original logic - decode the URL-encoded name parameter
+        const decodedName = decodeURIComponent(guestNameParam);
+        guestNameElement.textContent = decodedName;
         
-        // Update guest name in the invitation if present in URL
-        function updateGuestName() {
-            const guestNameParam = getQueryParam('name');
-            const guestNameElement = document.getElementById('guest-name-placeholder');
-            const guestNameBox = document.querySelector('.guest-name-box');
-            
-            if (guestNameParam && guestNameElement) {
-                // Decode the URL-encoded name parameter
-                const decodedName = decodeURIComponent(guestNameParam);
-                guestNameElement.textContent = decodedName;
-                
-                // Check if the text is primarily English
-                // Simple check: if it has more Latin characters than others
-                const englishPattern = /[a-zA-Z]/g;
-                const nonEnglishPattern = /[^\u0000-\u007F]/g;
-                
-                const englishChars = (decodedName.match(englishPattern) || []).length;
-                const nonEnglishChars = (decodedName.match(nonEnglishPattern) || []).length;
-                
-                // If it has more English characters than non-English
-                if (englishChars > nonEnglishChars) {
-                    guestNameBox.setAttribute('data-lang', 'en');
-                }
+        // Check if the text is primarily English as before
+        const englishPattern = /[a-zA-Z]/g;
+        const nonEnglishPattern = /[^\u0000-\u007F]/g;
+        
+        const englishChars = (decodedName.match(englishPattern) || []).length;
+        const nonEnglishChars = (decodedName.match(nonEnglishPattern) || []).length;
+        
+        // If it has more English characters than non-English
+        if (englishChars > nonEnglishChars) {
+            if (guestNameBox) {
+                guestNameBox.setAttribute('data-lang', 'en');
+            }
+        }
+    }
+    // If no direct name parameter but we have a guest code, use the mapping
+    else if (guestCodeParam && window.weddingGuestMap && window.weddingGuestMap[guestCodeParam] && guestNameElement) {
+        const mappedName = window.weddingGuestMap[guestCodeParam];
+        guestNameElement.textContent = mappedName;
+        
+        // Check if the mapped name is primarily English
+        const englishPattern = /[a-zA-Z]/g;
+        const nonEnglishPattern = /[^\u0000-\u007F]/g;
+        
+        const englishChars = (mappedName.match(englishPattern) || []).length;
+        const nonEnglishChars = (mappedName.match(nonEnglishPattern) || []).length;
+        
+        // Apply English styling if needed
+        if (englishChars > nonEnglishChars) {
+            if (guestNameBox) {
+                guestNameBox.setAttribute('data-lang', 'en');
             }
         }
         
-        // Call the function when the page loads
-        window.addEventListener('DOMContentLoaded', updateGuestName);
-
-        // Handle button click to navigate to main page
-        document.getElementById('openInvitation').addEventListener('click', function() {
-            // Get the current URL parameters
-            const currentUrl = window.location.href;
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            // Check if there are any parameters
-            if (urlParams.toString()) {
-                // Redirect to index-main.html with the same parameters
-                window.location.href = 'index-main.html' + window.location.search;
-            } else {
-                // No parameters, just go to index-main.html
-                window.location.href = 'index-main.html';
-            }
-        });
-
+        // Optionally update hidden fields for form submission
+        const guestNameField = document.getElementById('guest-name-field');
+        if (guestNameField) {
+            guestNameField.value = mappedName;
+        }
         
+        const guestIdField = document.getElementById('guest-id-field');
+        if (guestIdField) {
+            // Use the code as the ID, or the original guest ID if available
+            guestIdField.value = guestIdParam || guestCodeParam;
+        }
+    }
+}
+
+document.getElementById('openInvitation').addEventListener('click', function() {
+  // Get the current URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  // Check if there are any parameters
+  if (urlParams.toString()) {
+    // Redirect to index-main.html with the same parameters
+    window.location.href = 'index-main.html' + window.location.search;
+  } else {
+    // No parameters, just go to index-main.html
+    window.location.href = 'index-main.html';
+  }
+});
+
+// Call the function when the page loads
+window.addEventListener('DOMContentLoaded', updateGuestName);
     </script>
+    <script src="shortlink-mapper.js"></script>
+
 </body>
 </html>

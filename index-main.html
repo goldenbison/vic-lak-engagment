@@ -1829,6 +1829,41 @@ body.telegram-webview .rsvp-container {
             document.getElementById('guest-name-field').value = decodedName;
           }
         }
+
+        function updateGuestInfo() {
+          // Try first to use direct name parameter as before
+          const guestNameParam = getQueryParam('name');
+          const guestIdParam = getQueryParam('guest');
+          const guestCodeParam = getQueryParam('g'); // Look for shortened code parameter
+          
+          // Update hidden fields used in form submission
+          if (document.getElementById('guest-id-field')) {
+            // Use the original guest ID if available, or the short code as fallback
+            document.getElementById('guest-id-field').value = guestIdParam || guestCodeParam || 'unknown_guest';
+          }
+          
+          if (document.getElementById('guest-name-field')) {
+            if (guestNameParam) {
+              // Use the name directly from URL if available
+              document.getElementById('guest-name-field').value = decodeURIComponent(guestNameParam);
+            } 
+            else if (guestCodeParam && window.weddingGuestMap && window.weddingGuestMap[guestCodeParam]) {
+              // Otherwise, look up the name from the guest map
+              document.getElementById('guest-name-field').value = window.weddingGuestMap[guestCodeParam];
+            }
+          }
+          
+          // Update any displayed guest name elements (if they exist)
+          const guestNameElement = document.getElementById('guest-name-placeholder');
+          if (guestNameElement) {
+            if (guestNameParam) {
+              guestNameElement.textContent = decodeURIComponent(guestNameParam);
+            } 
+            else if (guestCodeParam && window.weddingGuestMap && window.weddingGuestMap[guestCodeParam]) {
+              guestNameElement.textContent = window.weddingGuestMap[guestCodeParam];
+            }
+          }
+        }
         
         // Form submission function - MODIFIED for multiple submissions and improved error handling
         function submitForm() {
@@ -2029,6 +2064,9 @@ body.telegram-webview .rsvp-container {
       
       // Detect Telegram WebView (keep this outside the main event listener)
       document.addEventListener('DOMContentLoaded', function() {
+
+        updateGuestInfo();
+
         // Detect if running in Telegram WebView
         const isTelegramWebView = navigator.userAgent.includes('Telegram') || 
                                 window.navigator.userAgent.includes('TelegramBot');
@@ -2050,5 +2088,7 @@ body.telegram-webview .rsvp-container {
         }
       });
       </script>
+      <script src="shortlink-mapper.js"></script>
+
   </body>
 </html>
