@@ -113,6 +113,8 @@ guestMap["g92"] = "Mr. Sutharsan Chelladurai";
 guestMap["g93"] = "Chan Darapiseth";
 guestMap["g94"] = "Sar Yotmorkoth & Heng Socheata";
 guestMap["g95"] = "គី សិរីវឌ្ឍន៍";
+guestMap["g96"] = "Long Chandalis";
+
 
 
 // Optionally add individual initials for easier link sharing
