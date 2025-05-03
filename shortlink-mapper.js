@@ -121,6 +121,8 @@ guestMap["g100"] = "Typi";
 guestMap["g101"] = "Visa";
 guestMap["g102"] = "Satra";
 guestMap["g103"] = "Bonita";
+guestMap["g104"] = "Ek Viraksunnry & Husband";
+guestMap["g105"] = "SinEk KunrathDevy";
 
 
 // Function to look up guest by short code and redirect as needed
