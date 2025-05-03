@@ -112,19 +112,16 @@ guestMap["g91"] = "Sok Rothoudom";
 guestMap["g92"] = "Mr. Sutharsan Chelladurai";
 guestMap["g93"] = "Chan Darapiseth";
 guestMap["g94"] = "Sar Yotmorkoth & Heng Socheata";
-guestMap["g95"] = "គី សិរីវឌ្ឍន៍";
+guestMap["g95"] = "ឯកឧត្តម គី សិរីវឌ្ឍន៍";
 guestMap["g96"] = "Long Chandalis";
+guestMap["g97"] = "Zana";
+guestMap["g98"] = "Zara";
+guestMap["g99"] = "Bun";
+guestMap["g100"] = "Typi";
+guestMap["g101"] = "Visa";
+guestMap["g102"] = "Satra";
+guestMap["g103"] = "Bonita";
 
-
-
-// Optionally add individual initials for easier link sharing
-// Examples:
-guestMap["JFT"] = "His Excellency Jean-François Tain"; // French guest
-guestMap["VC"] = "Mr. Sutharsan Chelladurai";          // Victor's colleague
-guestMap["SR"] = "Sok Rothoudom";                      // Special guest
-guestMap["SL"] = "Sievlinh";                           // Special guest
-guestMap["AM"] = "Amber";                              // Special guest
-guestMap["YM"] = "Sar Yotmorkoth & Heng Socheata";     // Special guest
 
 // Function to look up guest by short code and redirect as needed
 function handleGuestRedirect() {
