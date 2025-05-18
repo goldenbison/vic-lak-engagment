@@ -126,6 +126,12 @@ guestMap["g105"] = "SinEk KunrathDevy";
 guestMap["g106"] = "លោក ទុង រតនា";
 guestMap["g107"] = "លោកស្រី Sinat Leak នឹង ស្វាមី";
 guestMap["g108"] = "Doung Hang Leng";
+guestMap["g109"] = "Lim Rathasopolviseth";
+guestMap["g110"] = "Luis Rady Hun";
+guestMap["g111"] = "Monyreach Phal";
+guestMap["g112"] = "Khun Samnang Nirant";
+guestMap["g113"] = "Khun Samnang Vyvath";
+guestMap["g114"] = "Mr. Khun Sombo";
 
 // Function to look up guest by short code and redirect as needed
 function handleGuestRedirect() {
