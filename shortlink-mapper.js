@@ -168,6 +168,16 @@ guestMap["g147"] = "ឯកឧត្តម នាយឧត្តមសេនី�
 guestMap["g148"] = "លោកវរសេនីយ៍ឯក ភួង វ៉ាន់ដា";
 guestMap["g149"] = "Ung Siev Kaing";
 guestMap["g150"] = "លោកឧត្តមសេនីយ៍ត្រី លី ចំរើន";
+guestMap["g151"] = "Tim Li";
+guestMap["g152"] = "Andy Wang";
+guestMap["g153"] = "Nathan Nguyen";
+guestMap["g154"] = "Jacob Chan";
+guestMap["g155"] = "Richard Sze";
+guestMap["g156"] = "Bryant Thai";
+guestMap["g157"] = "Kenneth Thai";
+guestMap["g158"] = "Jason Thai";
+guestMap["g159"] = "Austin Eichelberg";
+
 
 
 // Function to look up guest by short code and redirect as needed
