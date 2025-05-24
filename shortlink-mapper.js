@@ -167,6 +167,7 @@ guestMap["g146"] = "លោកអនុសេនីយ៍ឯក អឿន គឹ�
 guestMap["g147"] = "ឯកឧត្តម នាយឧត្តមសេនីយ៍ ឃុន សំបូរ និងលោកជំទាវ ព្រំ ចាន់ភក្តី";
 guestMap["g148"] = "លោកវរសេនីយ៍ឯក ភួង វ៉ាន់ដា";
 guestMap["g149"] = "Ung Siev Kaing";
+guestMap["g150"] = "លោកឧត្តមសេនីយ៍ត្រី លី ចំរើន";
 
 
 // Function to look up guest by short code and redirect as needed
